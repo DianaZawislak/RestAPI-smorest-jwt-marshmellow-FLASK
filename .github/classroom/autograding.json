@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Finish Geography Routes",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest tests/pytest --pylint tests/test_geography_project2.py",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 40
+    },
+    {
+      "name": "Pylint Fixes",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest --pylint",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Project Option One",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest --pylint tests/test_option_you_pick_one.py",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Project Option 2 Test",
+      "setup": "sudo -H pip3 install -r requirements.txt",
+      "run": "pytest --pylint tests/test_option_you_pick_one.py",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    }
+  ]
+}
