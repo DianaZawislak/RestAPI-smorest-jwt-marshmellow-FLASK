@@ -9,8 +9,9 @@ from flask_smorest import Api
 
 from app.authentication import authentication
 from app.db import db, database
-from app.db.models import User, Country, City
+from app.db.models import User, Country, City, Brewery, Beer
 from app.geography import geography
+from app.beers import beers
 from app.logging_config import logging_config
 from flask_cors import CORS
 
@@ -34,7 +35,9 @@ def create_app():
         api.spec.components.security_scheme("bearerAuth", {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"})
         api.register_blueprint(authentication)
         api.register_blueprint(geography)
-        load_app_data()
+        api.register_blueprint(beers)
+        load_geography_data()
+        load_beer_data()
         api_v1_cors_config = {
             "methods": ["OPTIONS", "GET", "POST", "PUT", "DELETE", "PATCH"],
         }
@@ -50,7 +53,8 @@ def create_app():
 
     return app
 
-def load_app_data():
+def load_geography_data():
+    global country
     db.create_all()
     path = os.path.dirname(os.path.abspath(__file__))
     data_path = os.path.join(path, '..', 'data', 'worldcities.csv')
@@ -73,3 +77,29 @@ def load_app_data():
             # append the city to the country
             db.session.add(city)
         db.session.commit()
+
+def load_beer_data():
+    global brewery
+    db.create_all()
+    path = os.path.dirname(os.path.abspath(__file__))
+    data_path = os.path.join(path, '..', 'data', 'beer.csv')
+    # makes data frame to hold the world cities data
+    df = pd.read_csv(data_path)
+    # Gets a list of unique breweries from the data frame
+    breweries = df.brewery.unique()
+    for brewery_name in breweries:
+        # this creates a country model based on Sqlalchemy model
+        brewery = Brewery(name=brewery_name)
+        db.session.add(brewery)
+        db.session.commit()
+        # get a list of beers from the data frame that are in the country selected
+        beers = df.loc[df.brewery == brewery_name]
+        #loop through beers
+        for beer_string in beers['name']:
+            # Create a new beer
+            beer = Beer(name=beer_string, brewery_id=brewery.id)
+            # Set the name
+            # append the beer to the brewery
+            db.session.add(beer)
+            db.session.commit()
+
