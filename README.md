@@ -1,4 +1,4 @@
-[![Production Workflow 1](https://github.com/kaw393939/jwt-web-security-part-2/actions/workflows/prod.yml/badge.svg)](https://github.com/kaw393939/jwt-web-security-part-2/actions/workflows/prod.yml)
+[![Production Workflow 1](https://github.com/NJIT-WIS/jet-security-part-2-project-2-DianaZawislak/actions/workflows/prod.yml/badge.svg)](https://github.com/NJIT-WIS/jet-security-part-2-project-2-DianaZawislak/actions/workflows/prod.yml)
 
 # Project 2
 
