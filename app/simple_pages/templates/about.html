@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <img src="{{ url_for('static', filename='images/njit.jpg') }}" class="img-fluid" alt="docker1">
+<div class="col-lg-5 col-sm-12 mb-3 d-lg-none">
+                <img src="{{ url_for('static', filename='images/me.png') }}"
+                     class="img-fluid"
+                     alt="me">
+            </div>
+    <div class="container-fluid py-5">
+        <div class="row align-items stretch">
+            <div class="col-lg-7 col-sm-12 fs-5 mb-3">
+                <p class="fs-5 thicker ">Results-driven professional with solid knowledge in testing and deployment automation
+                    and configuration management. Proficient in Docker, Git, Source Code Management, GitHub, Pycharm,
+                    other IDE's and setting up flawless Continuous Integration/ Delivery pipelines.
+                </p>
+
+                <p class="fs-5 thicker"> Excellent at systems analysis and full cycle project management and methodologies. Experience
+                    includes hands-on system development efforts including application requirements, testing and
+                    support. Other competencies include Python, Python libraries, Bootstrap, WtfForms, creating and
+                    utilizing blueprints, REACT, Java, Javascript, Linux and Adobe Creative Suite.</p>
+                <ul class="fs-5 thicker">
+                    <li> Exceptionally skilled in managing multiple projects and project/release management.</li>
+
+                    <li> Demonstrated ability to effectively establish and maintain working relationships across
+                        disciplines.
+                    </li>
+
+                    <li> Hands-on knowledge of Source Code Management (Version Control System) with Git.</li>
+
+                </ul>
+                <br>
+
+               <p class="fs-5 thicker"> Education:<br><br>
+
+                New Jersey Institute of Technology, Newark, NJ<br>
+                Master's Certificate in Computer Science<br>
+                <br>
+                Walsh College, Troy, MI<br>
+                Bachelor of Science, Finance</p>
+
+            </div>
+            <div class="col-lg-5 col-sm-12 mb-3 d-none d-lg-block">
+                <img src="{{ url_for('static', filename='images/me.png') }}"
+                     class="img-fluid"
+                     alt="me">
+            </div>
+
+
+
+{% endblock %}

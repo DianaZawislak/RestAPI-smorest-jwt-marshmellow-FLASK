@@ -28,6 +28,7 @@ def create_app():
     db.init_app(app)
     app.register_blueprint(database)
     app.register_blueprint(logging_config)
+    app.register_blueprint(simple_pages)
     with app.app_context():
         jwt = JWTManager(app)
 
@@ -36,6 +37,7 @@ def create_app():
         api.register_blueprint(authentication)
         api.register_blueprint(geography)
         api.register_blueprint(beers)
+
         load_geography_data()
         load_beer_data()
         api_v1_cors_config = {
