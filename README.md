@@ -2,9 +2,9 @@
 
 # Project 2
 
-Name:
+Name:Diana Zawislak
 
-UCID:
+UCID:DZ29
 
 ## Introduction
 
