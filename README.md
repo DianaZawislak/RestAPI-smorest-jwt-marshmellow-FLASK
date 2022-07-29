@@ -74,7 +74,7 @@ from SAFRS in project 1.
 
 ## Put a link to your Production Heroku Deployment Here
 
-* [Swagger UI Link On Heroku](https://kwilliam-prod.herokuapp.com/swagger-ui)
+* [Swagger UI Link On Heroku](https://api-project-is960.herokuapp.com/swagger-ui)
 
 ## Running The app
 
