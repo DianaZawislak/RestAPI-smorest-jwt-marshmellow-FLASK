@@ -28,6 +28,31 @@ class City(db.Model):
         self.name = name
         self.country_id = country_id
 
+
+class Brewery(db.Model):
+    __tablename__ = "breweries"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, default="")
+    beers = db.relationship("Beer", back_populates="brewery")
+
+    def __init__(self, name):
+        self.name = name
+
+
+class Beer(db.Model):
+    __tablename__ = "beers"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, default="")
+    brewery_id = db.Column(db.Integer, db.ForeignKey("breweries.id"))
+    brewery = db.relationship("Brewery", back_populates="beers")
+
+
+    def __init__(self, name, brewery_id):
+        self.name = name
+        self.brewery_id = brewery_id
+
+
 class User(db.Model):
     """THis is the SQL Alchemy User model"""
     __tablename__ = 'users'
