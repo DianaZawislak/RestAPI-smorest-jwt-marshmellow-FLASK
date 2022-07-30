@@ -8,7 +8,7 @@ from app.db.models import Country, City
 from app.db import db
 from marshmallow import Schema, fields, EXCLUDE
 
-beers = Blueprint('beers', __name__, url_prefix="/beers", description="Beers by brewery")
+beers = Blueprint('Beers and Breweries', __name__, url_prefix="/beers", description="Beers by brewery")
 
 
 class BrewerySchema(Schema):
@@ -54,8 +54,45 @@ class Breweries(MethodView):
         return item
 
 
+@beers.route('/breweries:id')
+class CountryById(MethodView):
+
+    @beers.etag
+    @beers.response(201, BrewerySchema)
+    def get(self, item_id):
+        """Brewery by ID"""
+        return Brewery.query.get_or_404(item_id)
+
+    @beers.etag
+    @beers.arguments(BrewerySchema, location="json")
+    @beers.response(201, BrewerySchema)
+    @beers.doc(parameters=[{'name': 'If-Match', 'in': 'header', 'required': 'true'}])
+    @beers.doc(security=[{"bearerAuth": []}])
+    @jwt_required
+    def put(self, new_item, item_id):
+        """Update Brewery"""
+        item = Brewery.query.get_or_404(item_id)
+        geography.check_etag(item, BrewerySchema)
+        BrewerySchema().update(item, new_item)
+        db.session.add(item)
+        db.session.commit()
+        return item
+
+    @beers.etag
+    @beers.response(204)
+    @beers.doc(parameters=[{'name': 'If-Match', 'in': 'header', 'required': 'true'}])
+    @beers.doc(security=[{"bearerAuth": []}])
+    @jwt_required
+    def delete(self, item_id):
+        """Delete Brewery"""
+        item = Brewery.query.get_or_404(item_id)
+        beers.check_etag(item, BrewerySchema)
+        db.session.delete(item)
+        db.session.commit()
+
+
 @beers.route('/beers')
-class Breweries(MethodView):
+class Beers(MethodView):
 
     @beers.etag
     @beers.response(200, BeerSchema(many=True))
@@ -76,3 +113,39 @@ class Breweries(MethodView):
         db.session.add(item)
         db.session.commit()
         return item
+
+@beers.route('/beers:id')
+class BeerById(MethodView):
+
+    @beers.etag
+    @beers.response(201, BeerSchema)
+    def get(self, item_id):
+        """Beers by ID"""
+        return Beers.query.get_or_404(item_id)
+
+    @beers.etag
+    @beers.arguments(BeerSchema, location="json")
+    @beers.response(201, BeerSchema)
+    @beers.doc(parameters=[{'name': 'If-Match', 'in': 'header', 'required': 'true'}])
+    @beers.doc(security=[{"bearerAuth": []}])
+    @jwt_required
+    def put(self, new_item, item_id):
+        """Update Beers"""
+        item = Beers.query.get_or_404(item_id)
+        geography.check_etag(item, BeerSchema)
+        BeerSchema().update(item, new_item)
+        db.session.add(item)
+        db.session.commit()
+        return item
+
+    @beers.etag
+    @beers.response(204)
+    @beers.doc(parameters=[{'name': 'If-Match', 'in': 'header', 'required': 'true'}])
+    @beers.doc(security=[{"bearerAuth": []}])
+    @jwt_required
+    def delete(self, item_id):
+        """Delete Beers"""
+        item = Beers.query.get_or_404(item_id)
+        beers.check_etag(item, BeerSchema)
+        db.session.delete(item)
+        db.session.commit()

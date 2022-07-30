@@ -24,6 +24,7 @@ class City(db.Model):
     country_id = db.Column(db.Integer, db.ForeignKey("countries.id"))
     country = db.relationship("Country", back_populates="cities")
 
+
     def __init__(self, name, country_id):
         self.name = name
         self.country_id = country_id
@@ -34,6 +35,7 @@ class Brewery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, default="")
     beers = db.relationship("Beer", back_populates="brewery")
+
 
     def __init__(self, name):
         self.name = name
@@ -46,6 +48,7 @@ class Beer(db.Model):
     name = db.Column(db.String, default="")
     brewery_id = db.Column(db.Integer, db.ForeignKey("breweries.id"))
     brewery = db.relationship("Brewery", back_populates="beers")
+
 
 
     def __init__(self, name, brewery_id):
@@ -63,6 +66,7 @@ class User(db.Model):
     authenticated = db.Column(db.Boolean, default=False)
     registered_on = db.Column('registered_on', db.DateTime)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
 
     def __init__(self, username, password):
         self.username = username
