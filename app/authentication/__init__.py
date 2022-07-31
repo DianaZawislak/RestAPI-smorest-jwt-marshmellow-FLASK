@@ -11,7 +11,7 @@ from marshmallow import Schema, fields, EXCLUDE
 from app.db import db
 from app.db.models import User
 
-authentication = Blueprint('Authentication', __name__, url_prefix="/", description="Operations on users")
+authentication = Blueprint('Authentication', __name__, url_prefix="/auth", description="Operations on users")
 
 
 class RegisterUserSchema(Schema):

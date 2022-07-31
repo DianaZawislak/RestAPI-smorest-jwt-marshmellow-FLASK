@@ -2,7 +2,7 @@
 import os
 
 import pandas as pd
-from flask import Flask
+from flask import Flask, render_template
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_smorest import Api
@@ -14,6 +14,10 @@ from app.geography import geography
 from app.beers import beers
 from app.logging_config import logging_config
 from flask_cors import CORS
+from flask_bootstrap import Bootstrap5
+
+
+
 
 def create_app():
     """Create and configure an instance of the Flask application."""
@@ -24,6 +28,7 @@ def create_app():
         app.config.from_object("app.config.DevelopmentConfig")
     elif app.config["ENV"] == "testing":
         app.config.from_object("app.config.TestingConfig")
+    bootstrap = Bootstrap5(app)
     # initializes the database connection for the app
     db.init_app(app)
     app.register_blueprint(database)
@@ -53,6 +58,9 @@ def create_app():
             return User.query.filter_by(username=identity).one_or_none()
 
     return app
+
+app = Flask(__name__)
+
 
 def load_geography_data():
     global country
@@ -104,3 +112,8 @@ def load_beer_data():
             db.session.add(beer)
             db.session.commit()
 
+@app.route('/')
+def home():
+   return render_template('base.html')
+if __name__ == '__main__':
+   app.run()

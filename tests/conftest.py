@@ -1,5 +1,5 @@
 """This makes the test configuration setup"""
-# pylint: disable=redefined-outer-name
+# pylint: disable=redefined-outer-name, no-member
 
 import pytest
 from app import create_app, db
@@ -21,6 +21,7 @@ def application():
 
 @pytest.fixture()
 def create_user(application):
+    """this creates user"""
     with application.app_context():
         user = User(username="testUser", password="test")
         db.session.add(user)
@@ -37,3 +38,4 @@ def client(application):
 def runner(application):
     """This makes the task runner"""
     return application.test_cli_runner()
+

@@ -6,6 +6,9 @@ Name:Diana Zawislak
 
 UCID:DZ29
 
+#### Screenshot of my API running on local host (click on it to open swagger on Heroku)
+	![](app/static/images/img.png)
+
 ## Introduction
 
 This is the final unit for the course and brings together a lot of concepts we have seen throughout the course to make a
