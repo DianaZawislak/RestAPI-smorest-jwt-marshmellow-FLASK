@@ -1,10 +1,14 @@
+"""these are tests for country/city API endpoints"""
 from pprint import pprint
-
 from app import db
 from app.db.models import City, Country, User
 from flask_jwt_extended import create_access_token, decode_token
 
+# pylint: disable=consider-using-f-string, no-member, wrong-import-order,
+# pylint: disable=unused-import, unused-argument
+
 def test_create_city_country(application):
+    """this tests create the city method"""
     with application.app_context():
         country = Country(name="United States")
         db.session.add(country)
@@ -17,6 +21,7 @@ def test_create_city_country(application):
 
 
 def test_country_post(client, create_user):
+    """this tests country post method"""
     with client.application.app_context():
         access_token = create_token()
 
@@ -33,6 +38,7 @@ def test_country_post(client, create_user):
 
 
 def test_city__post(client, create_user):
+    """this tests city post method"""
     with client.application.app_context():
         access_token = create_token()
 
@@ -56,6 +62,7 @@ def test_city__post(client, create_user):
 
 
 def create_token():
+    """this tests create token"""
     user = User.query.first()
     access_token = create_access_token(user.username)
     return access_token
