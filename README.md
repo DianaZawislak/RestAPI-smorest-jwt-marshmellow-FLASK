@@ -6,8 +6,10 @@ Name:Diana Zawislak
 
 UCID:DZ29
 
-#### Screenshot of my API running on local host (click on it to open swagger on Heroku)
-	![](app/static/images/img.png)
+#### Screenshot of my API running on local host 
+* [Swagger UI Link On Heroku](https://api-project-is960.herokuapp.com/swagger-ui)    <=== click to se swagger UI on heroku
+
+![alt text](app/static/images/API.JPG)
 
 ## Introduction
 
