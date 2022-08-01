@@ -10,7 +10,6 @@ class Config(object):
     SECRET_KEY = 'This is an INSECURE secret!! DO NOT use this in production!!'
     JWT_SECRET_KEY = "ik,ncbxh"
     SESSION_COOKIE_SECURE = True
-    BOOTSTRAP_BOOTSWATCH_THEME = 'Simplex'
     APP_ROOT_DIRECTORY = os.getcwd()
     DB_DIRECTORY_LOCATION = os.path.join(APP_ROOT_DIRECTORY, "database")
     DB_FILE_LOCATION = os.path.join(DB_DIRECTORY_LOCATION, "db.sqlite")

@@ -38,4 +38,3 @@ def client(application):
 def runner(application):
     """This makes the task runner"""
     return application.test_cli_runner()
-

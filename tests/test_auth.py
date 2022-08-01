@@ -8,10 +8,10 @@ from app.db.models import User
 
 def test_register(client):
     """This registers the user"""
-    response = client.post("/register", json={"username": "keith", "password": "test"})
+    response = client.post("/register", json={"username": "testUser", "password": "test"})
     response_data = response.get_json()
     assert response.status_code == 201
-    assert response_data['username'] == 'keith'
+    assert response_data['username'] == 'testUser'
 
 
 def test_auth(client, create_user):

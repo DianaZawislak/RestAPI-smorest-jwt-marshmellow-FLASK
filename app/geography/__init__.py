@@ -8,7 +8,7 @@ from app.db.models import Country, City
 from app.db import db
 from marshmallow import Schema, fields, EXCLUDE
 
-geography = Blueprint('Geography - Countries and Cities', __name__, url_prefix="/geography", description="Operations on Locations")
+geography = Blueprint('Geography - Countries and Cities', __name__, url_prefix="/", description="Operations on Locations")
 
 
 class CountrySchema(Schema):

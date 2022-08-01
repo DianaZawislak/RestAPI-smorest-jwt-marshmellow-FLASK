@@ -33,6 +33,7 @@ def create_app():
     db.init_app(app)
     app.register_blueprint(database)
     app.register_blueprint(logging_config)
+
     with app.app_context():
         jwt = JWTManager(app)
 
@@ -112,8 +113,9 @@ def load_beer_data():
             db.session.add(beer)
             db.session.commit()
 
+
 @app.route('/')
-def home():
-   return render_template('base.html')
-if __name__ == '__main__':
-   app.run()
+def index():
+    return ('index' +
+            url_for('index.html'))
+

@@ -1,5 +1,5 @@
 id,name,style,brewery_id,brewery,city,state
-1,Devil's Cup,American Pale Ale (APA),177,18th Street Brewery,Gary, IN
+1,Devil's Cup,American Pale Ale (APA),177,,Gary, IN
 2,Sex and Candy,American IPA,177,18th Street Brewery,Gary, IN
 3,Sinister,American Double / Imperial IPA,177,18th Street Brewery,Gary, IN
 4,,American IPA,177,18th Street Brewery,Gary, IN

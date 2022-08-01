@@ -1,11 +1,13 @@
-"""these are tests for country/city API endpoints"""
+"""these are example tests"""
+# pylint: disable=unused-import
 from pprint import pprint
-from app import db
-from app.db.models import City, Country, User
 from flask_jwt_extended import create_access_token, decode_token
+from app import db, app, config
+from app.db.models import City, Country, User, Beer, Brewery
 
-# pylint: disable=consider-using-f-string, no-member, wrong-import-order,
-# pylint: disable=unused-import, unused-argument
+
+# pylint: disable=consider-using-f-string, no-member, undefined-variable
+# pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
 
 def test_create_city_country(application):
     """this tests create the city method"""
@@ -21,6 +23,7 @@ def test_create_city_country(application):
 
 
 def test_country_post(client, create_user):
+    # pylint: disable=unused-argument
     """this tests country post method"""
     with client.application.app_context():
         access_token = create_token()
@@ -37,7 +40,8 @@ def test_country_post(client, create_user):
 
 
 
-def test_city__post(client, create_user):
+def test_city_post(client, create_user):
+    # pylint: disable=unused-argument
     """this tests city post method"""
     with client.application.app_context():
         access_token = create_token()

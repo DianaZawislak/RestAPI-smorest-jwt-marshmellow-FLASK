@@ -8,7 +8,7 @@ from app.db.models import Country, City
 from app.db import db
 from marshmallow import Schema, fields, EXCLUDE
 
-beers = Blueprint('Beers and Breweries', __name__, url_prefix="/beers", description="Beers by brewery")
+beers = Blueprint('Beers and Breweries', __name__, url_prefix="/", description="Beers by brewery")
 
 
 class BrewerySchema(Schema):
@@ -30,7 +30,7 @@ class BeerSchema(Schema):
         strict = True
 
 
-@beers.route('/breweries')
+@beers.route('/<breweries>')
 class Breweries(MethodView):
 
     @beers.etag
