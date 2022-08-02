@@ -41,6 +41,7 @@ class BeerSchema(Schema):
 class BreweryQueryArgsSchema(Schema):
     brewery_id = marshmallow.fields.Int()
 
+
 class BeerQueryArgsSchema(Schema):
     beer_id = marshmallow.fields.Int()
 
@@ -53,8 +54,12 @@ class Breweries(MethodView):
     @beers.response(200, BrewerySchema(many=True))
     def get(self, args):
         """List Countries"""
-        #ret = Brewery.query.all()
-        return Brewery.query.filter_by(**args)
+        # ret = Brewery.query.all()
+        beer_id = args.pop('beer_id', None)
+        ret = Brewery.query.filter_by(**args)
+        if beer_id is not None:
+            ret = ret.join(Brewery.beers).filter(Beer.id == beer_id)
+        return ret
 
     @beers.etag
     @beers.arguments(BrewerySchema)
