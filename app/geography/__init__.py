@@ -1,5 +1,6 @@
 import os
 
+import marshmallow
 import pandas as pd
 from flask.views import MethodView
 from flask_jwt_extended import jwt_required
@@ -8,7 +9,8 @@ from app.db.models import Country, City
 from app.db import db
 from marshmallow import Schema, fields, EXCLUDE
 
-geography = Blueprint('Geography - Countries and Cities', __name__, url_prefix="/", description="Operations on Locations")
+geography = Blueprint('Geography - Countries and Cities', __name__, url_prefix="/",
+                      description="Operations on Locations")
 
 
 class CountrySchema(Schema):
@@ -30,10 +32,15 @@ class CitySchema(Schema):
         strict = True
 
 
+#class CountryQueryArgsSchema(Schema):
+   # country_id = marshmallow.fields.Int()
+
+
 @geography.route('/countries')
 class Countries(MethodView):
 
     @geography.etag
+   # @geography.arguments(CountryQueryArgsSchema, location='query')
     @geography.response(200, CountrySchema(many=True))
     def get(self):
         """List Countries"""
@@ -52,6 +59,7 @@ class Countries(MethodView):
         db.session.add(item)
         db.session.commit()
         return item
+
 
 @geography.route('/countries:id')
 class CountryById(MethodView):
@@ -88,6 +96,7 @@ class CountryById(MethodView):
         blp.check_etag(item, CountrySchema)
         db.session.delete(item)
         db.session.commit()
+
 
 @geography.route('/cities')
 class Cities(MethodView):
