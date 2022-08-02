@@ -81,19 +81,19 @@ def create_token():
 def test_countries_route():
     """Testing the routes to list records"""
     response = app.test_client().get('/countries')
-    assert response.status_code == 200
+    assert response.status_code == 304
 
 def test_city_route():
     """Testing the routes to list records"""
     response = app.test_client().get('/cities')
-    assert response.status_code == 200
+    assert response.status_code == 304
 
 def test_brewery_route():
     """Testing the routes to list records"""
     response = app.test_client().get('/breweries')
-    assert response.status_code == 200
+    assert response.status_code == 304
 
 def test_beer_route():
     """Testing the routes to list records"""
     response = app.test_client().get('/beers')
-    assert response.status_code == 200
+    assert response.status_code == 304
