@@ -95,27 +95,20 @@ def load_beer_data():
     data_path = os.path.join(path, '..', 'data', 'beer.csv')
     # makes data frame to hold the world cities data
     df = pd.read_csv(data_path)
-    # Gets a list of unique breweries from the data frame
+    # Gets a list of unique countries from the data frame
     breweries = df.brewery.unique()
     for brewery_name in breweries:
         # this creates a country model based on Sqlalchemy model
         brewery = Brewery(name=brewery_name)
         db.session.add(brewery)
         db.session.commit()
-        # get a list of beers from the data frame that are in the country selected
+        # get a list of cities from the data frame that are in the country selected
         beers = df.loc[df.brewery == brewery_name]
-        #loop through beers
+        # looping through all the cities
         for beer_string in beers['name']:
-            # Create a new beer
+            # Create a new city
             beer = Beer(name=beer_string, brewery_id=brewery.id)
             # Set the name
-            # append the beer to the brewery
+            # append the city to the country
             db.session.add(beer)
-            db.session.commit()
-
-
-@app.route('/')
-def index():
-    return ('index' +
-            url_for('index.html'))
-
+        db.session.commit()
