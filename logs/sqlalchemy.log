@@ -22588,3 +22588,208 @@ FROM users
  LIMIT ? OFFSET ?
 2022-08-01 02:00:30,536 [INFO] sqlalchemy.engine.Engine: [generated in 0.00026s] (1, 0)
 2022-08-01 02:00:30,539 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 03:27:32,048 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 03:27:32,064 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 03:27:32,064 [INFO] sqlalchemy.engine.Engine: [generated in 0.00054s] ()
+2022-08-02 03:27:32,080 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 03:28:59,835 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 03:28:59,839 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 03:28:59,839 [INFO] sqlalchemy.engine.Engine: [generated in 0.00051s] ()
+2022-08-02 03:28:59,858 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 03:55:21,199 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 03:55:21,200 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 03:55:21,200 [INFO] sqlalchemy.engine.Engine: [generated in 0.00030s] ()
+2022-08-02 03:55:21,209 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 03:56:40,523 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 03:56:40,525 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 03:56:40,525 [INFO] sqlalchemy.engine.Engine: [generated in 0.00051s] ()
+2022-08-02 03:56:40,546 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 03:58:11,395 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 03:58:11,396 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 03:58:11,397 [INFO] sqlalchemy.engine.Engine: [generated in 0.00054s] ()
+2022-08-02 03:58:11,420 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 04:23:37,081 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 04:23:37,082 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 04:23:37,082 [INFO] sqlalchemy.engine.Engine: [generated in 0.00029s] ()
+2022-08-02 04:23:37,093 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 04:23:44,877 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 04:23:44,878 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 04:23:44,879 [INFO] sqlalchemy.engine.Engine: [generated in 0.00037s] ()
+2022-08-02 04:23:44,885 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 04:23:53,895 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 04:23:53,896 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 04:23:53,896 [INFO] sqlalchemy.engine.Engine: [generated in 0.00037s] ()
+2022-08-02 04:23:53,909 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 04:43:48,806 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 04:43:48,807 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 04:43:48,807 [INFO] sqlalchemy.engine.Engine: [generated in 0.00027s] ()
+2022-08-02 04:43:48,813 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 04:44:08,479 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 04:44:08,481 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 04:44:08,481 [INFO] sqlalchemy.engine.Engine: [generated in 0.00054s] ()
+2022-08-02 04:44:08,500 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:04:39,269 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:04:39,271 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 05:04:39,271 [INFO] sqlalchemy.engine.Engine: [generated in 0.00062s] ()
+2022-08-02 05:04:39,301 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:14:34,942 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:14:34,943 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 05:14:34,943 [INFO] sqlalchemy.engine.Engine: [generated in 0.00034s] ()
+2022-08-02 05:14:34,977 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:16:42,898 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:16:42,900 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 05:16:42,900 [INFO] sqlalchemy.engine.Engine: [generated in 0.00038s] ()
+2022-08-02 05:16:42,909 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:30:37,573 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:30:37,575 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 05:30:37,575 [INFO] sqlalchemy.engine.Engine: [generated in 0.00057s] ()
+2022-08-02 05:30:37,583 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:40:52,283 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:40:52,284 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 05:40:52,284 [INFO] sqlalchemy.engine.Engine: [generated in 0.00037s] ()
+2022-08-02 05:40:52,292 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:48:27,502 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:48:27,503 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 05:48:27,504 [INFO] sqlalchemy.engine.Engine: [generated in 0.00033s] ()
+2022-08-02 05:48:27,526 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:54:04,781 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:54:04,782 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 05:54:04,782 [INFO] sqlalchemy.engine.Engine: [generated in 0.00033s] ()
+2022-08-02 05:54:04,834 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:54:26,127 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:54:26,128 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 05:54:26,129 [INFO] sqlalchemy.engine.Engine: [generated in 0.00036s] ()
+2022-08-02 05:54:26,183 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:54:26,918 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:54:26,918 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 05:54:26,919 [INFO] sqlalchemy.engine.Engine: [cached since 22.14s ago] ()
+2022-08-02 05:54:27,005 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:54:31,694 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:54:31,695 [INFO] sqlalchemy.engine.Engine: SELECT beers.id AS beers_id, beers.name AS beers_name, beers.brewery_id AS beers_brewery_id 
+FROM beers
+2022-08-02 05:54:31,695 [INFO] sqlalchemy.engine.Engine: [generated in 0.00029s] ()
+2022-08-02 05:54:31,707 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 05:54:35,765 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 05:54:35,765 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 05:54:35,765 [INFO] sqlalchemy.engine.Engine: [generated in 0.00025s] ()
+2022-08-02 05:54:35,771 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:03:36,088 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:03:36,089 [INFO] sqlalchemy.engine.Engine: SELECT cities.id AS cities_id, cities.name AS cities_name, cities.country_id AS cities_country_id 
+FROM cities
+2022-08-02 06:03:36,090 [INFO] sqlalchemy.engine.Engine: [generated in 0.00039s] ()
+2022-08-02 06:03:36,110 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:03:40,727 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:03:40,728 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 06:03:40,728 [INFO] sqlalchemy.engine.Engine: [generated in 0.00031s] ()
+2022-08-02 06:03:40,735 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:10:35,856 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:10:35,857 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 06:10:35,857 [INFO] sqlalchemy.engine.Engine: [generated in 0.00032s] ()
+2022-08-02 06:10:35,866 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:06,286 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:06,287 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 06:15:06,287 [INFO] sqlalchemy.engine.Engine: [generated in 0.00028s] ()
+2022-08-02 06:15:06,296 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:18,589 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:18,590 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:18,590 [INFO] sqlalchemy.engine.Engine: [generated in 0.00023s] ()
+2022-08-02 06:15:18,594 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:19,220 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:19,222 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:19,222 [INFO] sqlalchemy.engine.Engine: [generated in 0.00058s] ()
+2022-08-02 06:15:19,227 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:20,057 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:20,058 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:20,058 [INFO] sqlalchemy.engine.Engine: [generated in 0.00026s] ()
+2022-08-02 06:15:20,063 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:20,455 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:20,456 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:20,456 [INFO] sqlalchemy.engine.Engine: [cached since 1.235s ago] ()
+2022-08-02 06:15:20,460 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:20,696 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:20,697 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:20,697 [INFO] sqlalchemy.engine.Engine: [cached since 0.6397s ago] ()
+2022-08-02 06:15:20,702 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:20,887 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:20,887 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:20,887 [INFO] sqlalchemy.engine.Engine: [cached since 2.297s ago] ()
+2022-08-02 06:15:20,891 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:21,098 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:21,098 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:21,099 [INFO] sqlalchemy.engine.Engine: [cached since 1.041s ago] ()
+2022-08-02 06:15:21,102 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:21,284 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:21,285 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:21,285 [INFO] sqlalchemy.engine.Engine: [cached since 2.695s ago] ()
+2022-08-02 06:15:21,289 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:15:21,594 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:15:21,595 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:15:21,595 [INFO] sqlalchemy.engine.Engine: [cached since 1.537s ago] ()
+2022-08-02 06:15:21,599 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:16:03,133 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:16:03,134 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:16:03,134 [INFO] sqlalchemy.engine.Engine: [cached since 43.08s ago] ()
+2022-08-02 06:16:03,138 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:20:44,497 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:20:44,499 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:20:44,499 [INFO] sqlalchemy.engine.Engine: [generated in 0.00040s] ()
+2022-08-02 06:20:44,504 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:20:45,184 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:20:45,186 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:20:45,186 [INFO] sqlalchemy.engine.Engine: [generated in 0.00038s] ()
+2022-08-02 06:20:45,191 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:28:12,966 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:28:12,967 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:28:12,968 [INFO] sqlalchemy.engine.Engine: [generated in 0.00029s] ()
+2022-08-02 06:28:12,972 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:28:13,899 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:28:13,901 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:28:13,902 [INFO] sqlalchemy.engine.Engine: [generated in 0.00045s] ()
+2022-08-02 06:28:13,907 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:28:32,248 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:28:32,249 [INFO] sqlalchemy.engine.Engine: SELECT countries.id AS countries_id, countries.name AS countries_name 
+FROM countries
+2022-08-02 06:28:32,249 [INFO] sqlalchemy.engine.Engine: [generated in 0.00031s] ()
+2022-08-02 06:28:32,256 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2022-08-02 06:29:03,518 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2022-08-02 06:29:03,518 [INFO] sqlalchemy.engine.Engine: SELECT breweries.id AS breweries_id, breweries.name AS breweries_name 
+FROM breweries
+2022-08-02 06:29:03,519 [INFO] sqlalchemy.engine.Engine: [cached since 50.55s ago] ()
+2022-08-02 06:29:03,524 [INFO] sqlalchemy.engine.Engine: ROLLBACK
