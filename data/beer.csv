@@ -1,8 +1,7 @@
-id,name,style,brewery_id,brewery,city,state
-1,Devil's Cup,American Pale Ale (APA),177,,Gary, IN
+﻿id,name,style,brewery_id,brewery,city,state
+1,Devil's Cup,American Pale Ale (APA),177,18th Street Brewery,Gary, IN
 2,Sex and Candy,American IPA,177,18th Street Brewery,Gary, IN
 3,Sinister,American Double / Imperial IPA,177,18th Street Brewery,Gary, IN
-4,,American IPA,177,18th Street Brewery,Gary, IN
 5,Black Exodus,Oatmeal Stout,177,18th Street Brewery,Gary, IN
 6,Lake Street Express,American Pale Ale (APA),177,18th Street Brewery,Gary, IN
 7,Foreman,American Porter,177,18th Street Brewery,Gary, IN
@@ -10,7 +9,7 @@ id,name,style,brewery_id,brewery,city,state
 9,Cone Crusher,American Double / Imperial IPA,177,18th Street Brewery,Gary, IN
 10,Sophomoric Saison,Saison / Farmhouse Ale,177,18th Street Brewery,Gary, IN
 11,Regional Ring Of Fire,Saison / Farmhouse Ale,177,18th Street Brewery,Gary, IN
-12,Garce Selé,Saison / Farmhouse Ale,177,18th Street Brewery,Gary, IN
+12,Garce SelÃ©,Saison / Farmhouse Ale,177,18th Street Brewery,Gary, IN
 13,Troll Destroyer,Belgian IPA,177,18th Street Brewery,Gary, IN
 14,Bitter Bitch,American Pale Ale (APA),177,18th Street Brewery,Gary, IN
 15,Ginja Ninja,Cider,154,2 Towns Ciderhouse,Corvallis, OR
@@ -53,7 +52,7 @@ id,name,style,brewery_id,brewery,city,state
 52,Barn Yeti,Belgian Strong Dark Ale,60,4 Hands Brewing Company,Saint Louis, MO
 53,Scarecrow,American IPA,60,4 Hands Brewing Company,Saint Louis, MO
 54,Ironman,English Strong Ale,60,4 Hands Brewing Company,Saint Louis, MO
-55,Honey Kolsch,Kölsch,60,4 Hands Brewing Company,Saint Louis, MO
+55,Honey Kolsch,KÃ¶lsch,60,4 Hands Brewing Company,Saint Louis, MO
 56,Copperhead Amber,Belgian Dark Ale,60,4 Hands Brewing Company,Saint Louis, MO
 57,Rude Parrot IPA,American IPA,481,7 Seas Brewing Company,Gig Harbor, WA
 58,British Pale Ale (2010),English Pale Ale,481,7 Seas Brewing Company,Gig Harbor, WA
@@ -89,7 +88,7 @@ id,name,style,brewery_id,brewery,city,state
 88,Freeride APA,American Pale Ale (APA),270,Alaskan Brewing Company,Juneau, AK
 89,Alaskan Amber,Altbier,270,Alaskan Brewing Company,Juneau, AK
 90,Hopalicious,American Pale Ale (APA),73,Ale Asylum,Madison, WI
-91,Kentucky Kölsch,Kölsch,388,Alltech's Lexington Brewing Company,Lexington, KY
+91,Kentucky KÃ¶lsch,KÃ¶lsch,388,Alltech's Lexington Brewing Company,Lexington, KY
 92,Kentucky IPA,American IPA,388,Alltech's Lexington Brewing Company,Lexington, KY
 93,Dusty Trail Pale Ale,American Pale Ale (APA),401,Amnesia Brewing Company,Washougal, WA
 94,Damnesia,American IPA,401,Amnesia Brewing Company,Washougal, WA
@@ -126,10 +125,10 @@ id,name,style,brewery_id,brewery,city,state
 128,Long Leaf,American IPA,69,Appalachian Mountain Brewery,Boone, NC
 129,Honey Badger Blonde,American Blonde Ale,69,Appalachian Mountain Brewery,Boone, NC
 130,Porter (a/k/a Black Gold Porter),American Porter,69,Appalachian Mountain Brewery,Boone, NC
-138,Rocket Girl,Kölsch,528,Asheville Brewing Company,Asheville, NC
+138,Rocket Girl,KÃ¶lsch,528,Asheville Brewing Company,Asheville, NC
 139,Ninja Porter,American Porter,528,Asheville Brewing Company,Asheville, NC
 140,Shiva IPA,American IPA,528,Asheville Brewing Company,Asheville, NC
-141,Aslan Kölsch,Kölsch,353,Aslan Brewing Company,Bellingham, WA
+141,Aslan KÃ¶lsch,KÃ¶lsch,353,Aslan Brewing Company,Bellingham, WA
 142,Aslan IPA,American IPA,353,Aslan Brewing Company,Bellingham, WA
 143,Aslan Amber,American Amber / Red Ale,353,Aslan Brewing Company,Bellingham, WA
 144,This Season's Blonde,American Blonde Ale,523,Aspen Brewing Company,Aspen, CO
@@ -151,12 +150,12 @@ id,name,style,brewery_id,brewery,city,state
 160,Black Thunder,Schwarzbier,413,Austin Beerworks,Austin, TX
 161,Raja,American Double / Imperial IPA,37,Avery Brewing Company,Boulder, CO
 162,Perzik Saison,Saison / Farmhouse Ale,37,Avery Brewing Company,Boulder, CO
-163,Avery Joe’s Premium American Pilsner,German Pilsener,37,Avery Brewing Company,Boulder, CO
+163,Avery Joeâ€™s Premium American Pilsner,German Pilsener,37,Avery Brewing Company,Boulder, CO
 164,White Rascal,Witbier,37,Avery Brewing Company,Boulder, CO
 165,Avery India Pale Ale,American IPA,37,Avery Brewing Company,Boulder, CO
-166,Ellie’s Brown Ale,American Brown Ale,37,Avery Brewing Company,Boulder, CO
+166,Ellieâ€™s Brown Ale,American Brown Ale,37,Avery Brewing Company,Boulder, CO
 167,Pumpkin Beast,Pumpkin Ale,360,Aviator Brewing Company,Fuquay-Varina, NC
-168,OktoberBeast,Märzen / Oktoberfest,360,Aviator Brewing Company,Fuquay-Varina, NC
+168,OktoberBeast,MÃ¤rzen / Oktoberfest,360,Aviator Brewing Company,Fuquay-Varina, NC
 169,Mad Beach,American Pale Wheat Ale,360,Aviator Brewing Company,Fuquay-Varina, NC
 170,Hog Wild India Pale Ale,American IPA,360,Aviator Brewing Company,Fuquay-Varina, NC
 171,Devils Tramping Ground Tripel,Tripel,360,Aviator Brewing Company,Fuquay-Varina, NC
@@ -168,7 +167,7 @@ id,name,style,brewery_id,brewery,city,state
 177,Back East Ale,American Amber / Red Ale,235,Back East Brewing Company,Bloomfield, CT
 182,Grapefruit Sculpin,American IPA,34,Ballast Point Brewing Company,San Diego, CA
 183,Even Keel,American IPA,34,Ballast Point Brewing Company,San Diego, CA
-184,Ballast Point Pale Ale,Kölsch,34,Ballast Point Brewing Company,San Diego, CA
+184,Ballast Point Pale Ale,KÃ¶lsch,34,Ballast Point Brewing Company,San Diego, CA
 185,Big Eye India Pale Ale,American IPA,34,Ballast Point Brewing Company,San Diego, CA
 186,Longfin Lager,Munich Helles Lager,34,Ballast Point Brewing Company,San Diego, CA
 187,Sculpin IPA,American IPA,34,Ballast Point Brewing Company,San Diego, CA
@@ -178,7 +177,7 @@ id,name,style,brewery_id,brewery,city,state
 191,Thai.p.a,American IPA,20,Bare Hands Brewery,Granger, IN
 192,Barrio Blanco,American IPA,251,Barrio Brewing Company,Tucson, AZ
 193,Barrio Tucson Blonde,American Blonde Ale,251,Barrio Brewing Company,Tucson, AZ
-194,Hop in the ‘Pool Helles,American Pilsner,116,Base Camp Brewing Co.,Portland, OR
+194,Hop in the â€˜Pool Helles,American Pilsner,116,Base Camp Brewing Co.,Portland, OR
 195,Ultra Gnar Gnar IPA,American IPA,116,Base Camp Brewing Co.,Portland, OR
 196,In-Tents India Pale Lager,American Pale Lager,116,Base Camp Brewing Co.,Portland, OR
 197,Lost Meridian Wit,Witbier,116,Base Camp Brewing Co.,Portland, OR
