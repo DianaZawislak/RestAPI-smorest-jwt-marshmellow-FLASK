@@ -42,7 +42,6 @@ def create_app():
         api.register_blueprint(authentication)
         api.register_blueprint(geography)
         api.register_blueprint(beers)
-
         load_geography_data()
         load_beer_data()
         api_v1_cors_config = {
