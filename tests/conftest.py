@@ -38,3 +38,41 @@ def client(application):
 def runner(application):
     """This makes the task runner"""
     return application.test_cli_runner()
+
+@pytest.fixture()
+def created_beer_id(client):
+    response = client.post(
+        "/beers",
+        json={"name": "Test beer"},
+    )
+
+    return response.json["id"]
+
+@pytest.fixture()
+def created_city_id(client):
+    response = client.post(
+        "/cities",
+        json={"name": "Test city"},
+    )
+
+    return response.json["id"]
+
+
+@pytest.fixture()
+def created_country_id(client):
+    response = client.post(
+        "/countries",
+        json={"name": "Test country"},
+    )
+
+    return response.json["id"]
+
+
+@pytest.fixture()
+def created_brewery_id(client):
+    response = client.post(
+        "/brewery",
+        json={"name": "Test brewery"},
+    )
+
+    return response.json["id"]
