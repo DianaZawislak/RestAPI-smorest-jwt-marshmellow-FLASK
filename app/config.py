@@ -34,6 +34,7 @@ class Config(object):
                  'contact': {
                      'email': 'diana.zawislak@icloud.com'
                  },},}
+
 class ProductionConfig(Config):
     pass
 
