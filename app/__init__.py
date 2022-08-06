@@ -2,7 +2,7 @@
 import os
 
 import pandas as pd
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_smorest import Api
@@ -15,8 +15,6 @@ from app.beers import beers
 from app.logging_config import logging_config
 from flask_cors import CORS
 from flask_bootstrap import Bootstrap5
-
-
 
 
 def create_app():
@@ -48,6 +46,7 @@ def create_app():
             "methods": ["OPTIONS", "GET", "POST", "PUT", "DELETE", "PATCH"],
         }
         CORS(app, resources={"/*": api_v1_cors_config})
+
         @jwt.user_identity_loader
         def user_identity_lookup(user):
             return user
@@ -57,7 +56,27 @@ def create_app():
             identity = jwt_data["sub"]
             return User.query.filter_by(username=identity).one_or_none()
 
+        @jwt.expired_token_loader
+        def expired_token_callback(jwt_header, jwt_payload):
+            return (
+                jsonify({"message": "The token has expired.", "error": "token_expired"}),
+                401,
+            )
+
+        @jwt.needs_fresh_token_loader
+        def token_not_fresh_callback(jwt_header, jwt_payload):
+            return (
+                jsonify(
+                    {
+                        "description": "The token is not fresh.",
+                        "error": "fresh_token_required",
+                    }
+                ),
+                401,
+            )
+
     return app
+
 
 app = Flask(__name__)
 
@@ -86,6 +105,7 @@ def load_geography_data():
             # append the city to the country
             db.session.add(city)
         db.session.commit()
+
 
 def load_beer_data():
     global brewery

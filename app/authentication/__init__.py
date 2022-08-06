@@ -3,10 +3,14 @@ import json
 from datetime import datetime
 from pprint import pprint
 
+from coverage import data
 from flask import request, jsonify
-from flask_jwt_extended import create_access_token, jwt_required, current_user, decode_token
+from flask.views import MethodView
+from flask_jwt_extended import create_access_token, jwt_required, current_user, decode_token, create_refresh_token, \
+    get_jwt_identity, get_jwt
 from flask_smorest import Blueprint, abort
 from marshmallow import Schema, fields, EXCLUDE
+from sqlalchemy.sql.functions import user
 
 from app.db import db
 from app.db.models import User
@@ -118,3 +122,17 @@ def protected():
         id=current_user.id,
         username=current_user.username,
     )
+
+
+@authentication.route("/refresh", methods=["POST"])
+@authentication.arguments(LoginUserSchemaPost, location="json")
+@authentication.doc(security=[{"bearerAuth": []}])
+class TokenRefresh(MethodView):
+    @jwt_required(refresh=True)
+    def post(self):
+        current_user = get_jwt_identity()
+        new_token = create_access_token(identity=current_user, fresh=False)
+        refresh_token = create_refresh_token(user.id)
+        return jsonify(new_token=new_token,
+                       refresh_token=refresh_token,
+                       token_type='Bearer'), 200
