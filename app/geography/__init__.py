@@ -77,7 +77,11 @@ class BeerById(MethodView):
         country = Country.query.get_or_404(country_id)
         return country
 
+    @geography.etag
+    @geography.arguments(CountrySchema, location="json")
+    @geography.response(201, CountrySchema)
     @geography.doc(security=[{"bearerAuth": []}])
+    @jwt_required()
     def put(self, new_item, item_id):
         """Modify existing country by ID"""
         item = Country.query.get_or_404(item_id)
@@ -112,7 +116,6 @@ class Cities(MethodView):
     @geography.arguments(CitySchema, location="json")
     @geography.response(201, CitySchema)
     @geography.doc(security=[{"bearerAuth": []}])
-    @jwt_required()
     def post(self, new_item):
         """Add a City"""
         item = City(**new_item)
