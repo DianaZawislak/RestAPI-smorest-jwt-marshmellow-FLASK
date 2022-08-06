@@ -1,10 +1,10 @@
 """This makes the test configuration setup"""
 # pylint: disable=redefined-outer-name, no-member
-
+# pylint: disable=missing-function-docstring, unused-argument
 import pytest
 from flask_jwt_extended import create_access_token
 
-from app import create_app, db
+from app import create_app, db, app
 from app.db.models import User
 
 
@@ -41,6 +41,7 @@ def runner(application):
     """This makes the task runner"""
     return application.test_cli_runner()
 
+
 @pytest.fixture()
 def created_beer_id(client):
     response = client.post(
@@ -49,6 +50,7 @@ def created_beer_id(client):
     )
 
     return response.json["id"]
+
 
 @pytest.fixture()
 def created_city_id(client):
@@ -88,14 +90,7 @@ def fresh_jwt(app):
 
 
 @pytest.fixture()
-def jwt(app):
-    with app.app_context():
-        access_token = create_access_token(identity=1)
-        return access_token
-
-
-@pytest.fixture()
-def admin_jwt(app):
+def admin_jwt(application):
     with app.app_context():
         access_token = create_access_token(
             identity=1, additional_claims={"is_admin": True}
