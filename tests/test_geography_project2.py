@@ -13,7 +13,7 @@ from app.db.models import City, Country, User, Beer, Brewery
 def test_delete_city(client, created_city_id):
     """this tests city delete method"""
     response = client.delete(
-        f"/item/{created_city_id}",
+        f"/cities/{created_city_id}",
     )
 
     assert response.status_code == 200
@@ -23,7 +23,7 @@ def test_delete_city(client, created_city_id):
 def test_get_city_not_found(client):
     """this tests city not found"""
     response = client.get(
-        "/city/1999",
+        "/cities/1999",
     )
 
     assert response.status_code == 404
