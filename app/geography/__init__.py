@@ -2,9 +2,13 @@ import os
 
 import marshmallow
 import pandas as pd
+from flask import abort
 from flask.views import MethodView
 from flask_jwt_extended import jwt_required
 from flask_smorest import Blueprint, Page
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy_utils.types import country
+
 from app.db.models import Country, City
 from app.db import db
 from marshmallow import Schema, fields, EXCLUDE
@@ -16,7 +20,6 @@ geography = Blueprint('Geography - Countries and Cities', __name__, url_prefix="
 class CountrySchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.String()
-    city_id = fields.Integer()
 
     class Meta:
         type_ = "Country"
@@ -29,7 +32,7 @@ class CountrySchema(Schema):
 class CitySchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.String()
-    country_id = fields.Integer()
+    country_id = fields.Int()
 
     class Meta:
         type_ = "City"
@@ -67,7 +70,6 @@ class Countries(MethodView):
 @geography.route('/countries/<string:country_id>')
 class BeerById(MethodView):
     @geography.doc(description="Return Countries based on ID", summary="Finds country by ID")
-    @geography.doc(security=[{"bearerAuth": []}])
     @jwt_required()
     @geography.response(200, CountrySchema)
     def get(self, country_id):
@@ -75,6 +77,7 @@ class BeerById(MethodView):
         country = Country.query.get_or_404(country_id)
         return country
 
+    @geography.doc(security=[{"bearerAuth": []}])
     def put(self, new_item, item_id):
         """Modify existing country by ID"""
         item = Country.query.get_or_404(item_id)
@@ -84,13 +87,13 @@ class BeerById(MethodView):
         db.session.commit()
         return item, {"message": "Country updated"}, 200
 
+    @geography.doc(security=[{"bearerAuth": []}])
     def delete(self, country_id):
         """Delete country"""
         country = Country.query.get_or_404(country_id)
         db.session.delete(country)
         db.session.commit()
         return {"message": "Country deleted"}, 200
-
 
 
 @geography.route('/cities')
@@ -112,18 +115,17 @@ class Cities(MethodView):
     @jwt_required()
     def post(self, new_item):
         """Add a City"""
-
         item = City(**new_item)
         db.session.add(item)
         db.session.commit()
         return item
+
 
 @geography.route("/cities/<string:city_id>")
 class CityById(MethodView):
 
     @geography.etag
     @geography.doc(description="Returns cities based on ID", summary="Finds city by ID")
-    @geography.doc(security=[{"bearerAuth": []}])
     @jwt_required()
     @geography.response(200, CitySchema)
     def get(self, city_id):
@@ -142,7 +144,6 @@ class CityById(MethodView):
         db.session.update(item)
         db.session.commit()
         return item, {"message": "City updated"}
-
 
     def delete(self, city_id):
         """Delete City"""
