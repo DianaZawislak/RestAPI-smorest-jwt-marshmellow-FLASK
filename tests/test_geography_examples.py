@@ -1,16 +1,14 @@
-"""these are example tests"""
-# pylint: disable=unused-import
+"""example tests"""
 from pprint import pprint
-from flask_jwt_extended import create_access_token, decode_token
-from app import db, app, config
-from app.db.models import City, Country, User, Beer, Brewery
+from flask_jwt_extended import create_access_token
+from app import db
+from app.db.models import City, Country, User
 
 
-# pylint: disable=consider-using-f-string, no-member, undefined-variable
-# pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
+# pylint: disable=consider-using-f-string, no-member, undefined-variable, unused-argument
 
 def test_create_city_country(application):
-    """this tests create the city method"""
+    """test creat city-country"""
     with application.app_context():
         country = Country(name="United States")
         db.session.add(country)
@@ -23,8 +21,7 @@ def test_create_city_country(application):
 
 
 def test_country_post(client, create_user):
-    # pylint: disable=unused-argument
-    """this tests country post method"""
+    """test post country"""
     with client.application.app_context():
         access_token = create_token()
 
@@ -33,16 +30,14 @@ def test_country_post(client, create_user):
     headers = {
         'Authorization': 'Bearer {}'.format(access_token)
     }
-    response = client.post('/geography/countries', json=data, headers=headers)
+    response = client.post('/countries', json=data, headers=headers)
     response_data = response.get_json()
     assert response.status_code == 201
     assert response_data["name"] == "United States"
 
 
-
 def test_city_post(client, create_user):
-    # pylint: disable=unused-argument
-    """this tests city post method"""
+    """test post city"""
     with client.application.app_context():
         access_token = create_token()
 
@@ -51,14 +46,14 @@ def test_city_post(client, create_user):
     headers = {
         'Authorization': 'Bearer {}'.format(access_token)
     }
-    response = client.post('/geography/countries', json=data, headers=headers)
+    response = client.post('/countries', json=data, headers=headers)
     response_data = response.get_json()
     country_id = response_data['id']
     pprint(country_id)
 
     data = {"country_id": country_id, "name": "Newark"}
 
-    response = client.post('/geography/cities', json=data, headers=headers)
+    response = client.post('/cities', json=data, headers=headers)
     assert response.status_code == 201
     response_data = response.get_json()
     assert response_data["id"] == 1
@@ -66,7 +61,7 @@ def test_city_post(client, create_user):
 
 
 def create_token():
-    """this tests create token"""
+    """test create token"""
     user = User.query.first()
     access_token = create_access_token(user.username)
     return access_token
