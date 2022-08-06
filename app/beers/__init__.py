@@ -80,7 +80,6 @@ class Breweries(MethodView):
 @beers.route("/brewery/<string:brewery_id>")
 class BreweriesById(MethodView):
     @beers.doc(description="Return Breweries based on ID", summary="Finds breweries by ID")
-    @beers.doc(security=[{"bearerAuth": []}])
     @jwt_required()
     @beers.response(200, BrewerySchema)
     def get(self, brewery_id):
@@ -89,7 +88,7 @@ class BreweriesById(MethodView):
         return brewery
 
     #@beers.arguments(BreweryNameUpdateSchema)
-
+    @beers.doc(security=[{"bearerAuth": []}])
     @beers.etag
     @beers.arguments(BrewerySchema, location="json")
     @beers.response(200, BrewerySchema)
@@ -102,6 +101,7 @@ class BreweriesById(MethodView):
         db.session.commit()
         return item, {"message": "Brewery name updated"}, 200
 
+    @beers.doc(security=[{"bearerAuth": []}])
     def delete(self, brewery_id):
         brewery = Brewery.query.get_or_404(brewery_id)
         db.session.delete(brewery)
@@ -139,7 +139,6 @@ class Beers(MethodView):
 class BeersById(MethodView):
     @beers.etag
     @beers.doc(description="ReturnBeers based on ID", summary="Finds beers by ID")
-    @beers.doc(security=[{"bearerAuth": []}])
     @jwt_required()
     @beers.response(200, BeerSchema)
     def get(self, beer_id):
@@ -147,6 +146,7 @@ class BeersById(MethodView):
         beer = Beer.query.get_or_404(beer_id)
         return beer
 
+    @beers.doc(security=[{"bearerAuth": []}])
     def put(self, new_item, item_id):
         """Modify existing beer by ID"""
         item = Beer.query.get_or_404(item_id)
@@ -156,6 +156,7 @@ class BeersById(MethodView):
         db.session.commit()
         return item, {"message": "Beer updated"}, 200
 
+    @beers.doc(security=[{"bearerAuth": []}])
     def delete(self, beer_id):
         """Delete ber"""
         beer = Beer.query.get_or_404(beer_id)
