@@ -2,6 +2,8 @@
 import pytest
 
 
+# pylint: disable=redefined-outer-name
+
 @pytest.fixture()
 def created_user_jwts(client, created_user_details):
     """fixture"""
@@ -52,7 +54,6 @@ def test_register_user_already_exists(client):
     )
 
     assert response.status_code == 200
-
 
 
 def test_login_user_bad_password(client, created_user_details):
