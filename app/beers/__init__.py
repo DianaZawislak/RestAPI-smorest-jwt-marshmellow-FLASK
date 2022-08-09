@@ -43,12 +43,14 @@ class BreweryQueryArgsSchema(Schema):
     brewery_id = marshmallow.fields.Int()
 
 
-class BreweryNameUpdateSchema(Schema):
+class BeerUpdateSchema(Schema):
     name = fields.Str()
+    id = fields.Integer()
 
 
-class BeerNameUpdateSchema(Schema):
+class BreweryUpdateSchema(Schema):
     name = fields.Str()
+    id = fields.Integer()
 
 
 @beers.route('/brewery')
@@ -80,29 +82,34 @@ class Breweries(MethodView):
 @beers.route("/brewery/<string:brewery_id>")
 class BreweriesById(MethodView):
     @beers.doc(description="Return Breweries based on ID", summary="Finds breweries by ID")
-    @jwt_required()
     @beers.response(200, BrewerySchema)
     def get(self, brewery_id):
         """Breweries by ID"""
         brewery = Brewery.query.get_or_404(brewery_id)
         return brewery
 
-    #@beers.arguments(BreweryNameUpdateSchema)
-    @beers.doc(security=[{"bearerAuth": []}])
-    @beers.etag
-    @beers.arguments(BrewerySchema, location="json")
+    @beers.arguments(BreweryUpdateSchema)
     @beers.response(200, BrewerySchema)
-    def put(self, new_item, item_id):
-        """Update an existing member"""
-        item = Brewery.query.get_or_404(item_id)
-        beers.check_etag(item, BrewerySchema)
-        BrewerySchema().update(item, new_item)
+    @beers.doc(description="Updates Brewery based on ID", summary="Updates brewery by ID")
+    def put(self, item_data, brewery_id):
+        """update brewery"""
+        item = Brewery.query.get_or_404(brewery_id)
+
+        if item:
+            item.price = item_data["id"]
+            item.name = item_data["name"]
+        else:
+            item = Brewery(**item_data)
+
         db.session.add(item)
         db.session.commit()
-        return item, {"message": "Brewery name updated"}, 200
+
+        return item, {"message": "Brewery updated"}, 200
 
     @beers.doc(security=[{"bearerAuth": []}])
+    @beers.doc(description="Deletes Brewery based on ID", summary="Deletes brewery by ID")
     def delete(self, brewery_id):
+        """delete brewery"""
         brewery = Brewery.query.get_or_404(brewery_id)
         db.session.delete(brewery)
         db.session.commit()
@@ -125,7 +132,6 @@ class Beers(MethodView):
     @beers.arguments(BeerSchema, location="json")
     @beers.response(201, BeerSchema)
     @beers.doc(security=[{"bearerAuth": []}])
-    @jwt_required()
     def post(self, new_item):
         """Add a Beer"""
 
@@ -138,24 +144,31 @@ class Beers(MethodView):
 @beers.route("/beers/<string:beer_id>")
 class BeersById(MethodView):
     @beers.etag
-    @beers.doc(description="ReturnBeers based on ID", summary="Finds beers by ID")
-    @jwt_required()
+    @beers.doc(description="Returns Beers based on ID", summary="Finds beers by ID")
     @beers.response(200, BeerSchema)
     def get(self, beer_id):
         """Breweries by ID"""
         beer = Beer.query.get_or_404(beer_id)
         return beer
 
-    @beers.doc(security=[{"bearerAuth": []}])
-    def put(self, new_item, item_id):
-        """Modify existing beer by ID"""
-        item = Beer.query.get_or_404(item_id)
-        beers.check_etag(item, BeerSchema)
-        BeerSchema().update(item, new_item)
+    @beers.doc(description="Updates Beers based on ID", summary="Updates beers by ID")
+    @beers.arguments(BeerUpdateSchema)
+    @beers.response(200, BeerSchema)
+    def put(self, item_data, beer_id):
+        item = Beer.query.get_or_404(beer_id)
+
+        if item:
+            item.price = item_data["id"]
+            item.name = item_data["name"]
+        else:
+            item = Beer(**item_data)
+
         db.session.add(item)
         db.session.commit()
+
         return item, {"message": "Beer updated"}, 200
 
+    @beers.doc(description="Deletes Beers based on ID", summary="Deletes beers by ID")
     @beers.doc(security=[{"bearerAuth": []}])
     def delete(self, beer_id):
         """Delete ber"""

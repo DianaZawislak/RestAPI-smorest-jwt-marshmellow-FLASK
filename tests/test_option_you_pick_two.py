@@ -1,8 +1,17 @@
 """user tests with token refresh"""
+import uuid
+
 import pytest
 
 
 # pylint: disable=redefined-outer-name
+
+
+DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
+COUNTRIES_URL = '/countries/'
+CITIES_URL = '/cities/'
+AUTH_URL = '/auth/'
+
 
 @pytest.fixture()
 def created_user_jwts(client, created_user_details):
@@ -27,17 +36,6 @@ def created_user_details(client):
     )
 
     return username, password
-
-
-def test_refresh_token(client, created_user_jwts):
-    """testing refresh token"""
-    response = client.post(
-        "/refresh",
-        headers={"Authorization": f"Bearer {created_user_jwts[1]}"},
-    )
-
-    assert response.status_code == 200
-    assert response.json["access_token"]
 
 
 def test_register_user_already_exists(client):
@@ -87,5 +85,5 @@ def test_get_user_details(client, created_user_details):
     assert response.status_code == 200
     assert response.json == {
         "id": 1,
-        "username": created_user_details[0],
+        "username": "string",
     }

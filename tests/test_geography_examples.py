@@ -8,7 +8,7 @@ from app.db.models import City, Country, User
 # pylint: disable=consider-using-f-string, no-member, undefined-variable, unused-argument
 
 def test_create_city_country(application):
-    """test creat city-country"""
+    """test create city-country"""
     with application.app_context():
         country = Country(name="United States")
         db.session.add(country)
