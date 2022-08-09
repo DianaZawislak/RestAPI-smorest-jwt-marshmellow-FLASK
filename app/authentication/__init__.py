@@ -5,7 +5,7 @@ from pprint import pprint
 from flask import request, jsonify
 from flask.views import MethodView
 from flask_jwt_extended import create_access_token, jwt_required, current_user, decode_token, create_refresh_token, \
-    get_jwt
+    get_jwt, get_jwt_identity
 from flask_smorest import Blueprint, abort
 from marshmallow import Schema, fields, EXCLUDE
 
@@ -153,7 +153,6 @@ def protected():
 class UserLogout(MethodView):
     @jwt_required()
     def post(self):
-        jti = get_jwt()["jti"]
         return {"message": "Successfully logged out"}, 200
 
 
@@ -166,3 +165,11 @@ def delete(self, user_id):
     db.session.delete(user)
     db.session.commit()
     return {"message": "User deleted"}, 200
+
+@authentication.route("/refresh")
+class TokenRefresh(MethodView):
+    @jwt_required(refresh=True)
+    def post(self):
+        current_user = get_jwt_identity()
+        new_token = create_access_token(identity=current_user, fresh=False)
+        return {"access_token": new_token}, 200
