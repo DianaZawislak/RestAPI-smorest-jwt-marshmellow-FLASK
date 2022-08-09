@@ -2,20 +2,17 @@
 import json
 from datetime import datetime
 from pprint import pprint
-
-from coverage import data
 from flask import request, jsonify
 from flask.views import MethodView
 from flask_jwt_extended import create_access_token, jwt_required, current_user, decode_token, create_refresh_token, \
-    get_jwt_identity, get_jwt
+    get_jwt
 from flask_smorest import Blueprint, abort
 from marshmallow import Schema, fields, EXCLUDE
-from sqlalchemy.sql.functions import user
 
 from app.db import db
 from app.db.models import User
 
-authentication = Blueprint('Authentication', __name__, url_prefix="/", description="Operations on users")
+authentication = Blueprint('authentication', __name__, url_prefix="/", description="Operations on users")
 
 
 class RegisterUserSchema(Schema):
@@ -64,12 +61,16 @@ class JWTSchema(Schema):
     expires = fields.Str()
 
 
+class UserUpdateSchema(Schema):
+    name = fields.Str()
+    id = fields.Integer()
+
 @authentication.route('/register', methods=['POST'])
 @authentication.arguments(RegisterUserSchema, location="json")
 @authentication.response(201, RegisterUserResponseSchema)
+@authentication.doc(description="Register User", summary="Register User")
 def register(data):
     """Register a User
-
     Return a user.
     ---
     Internal comment not meant to be exposed.
@@ -96,6 +97,7 @@ def register(data):
 @authentication.route("/auth", methods=["POST"])
 @authentication.arguments(LoginUserSchemaPost, location="json")
 @authentication.response(201, JWTSchema)
+@authentication.doc(description="Authorize User/Login", summary="Authorize User/Login")
 def login(data):
     username = data['username']
     password = data['password']
@@ -108,14 +110,17 @@ def login(data):
         db.session.commit()
         access_token = create_access_token(identity=username)
         pure_decoded = decode_token(access_token)
+        refresh_token = create_refresh_token(user.id)
         return jsonify(access_token=access_token,
                        token_type='Bearer',
+                       refresh_token=refresh_token,
                        expires=datetime.fromtimestamp(pure_decoded["exp"]).strftime('%Y-%m-%d %H:%M:%S')), 200
 
 
 @authentication.route("/user_info", methods=["GET"])
 @authentication.doc(security=[{"bearerAuth": []}])
 @jwt_required()
+@authentication.doc(description="Get User Info", summary="Get User Info")
 def protected():
     # We can now access our sqlalchemy User object via `current_user`.
     return jsonify(
@@ -124,15 +129,40 @@ def protected():
     )
 
 
-@authentication.route("/refresh", methods=["POST"])
-@authentication.arguments(LoginUserSchemaPost, location="json")
-@authentication.doc(security=[{"bearerAuth": []}])
-class TokenRefresh(MethodView):
-    @jwt_required(refresh=True)
+#@authentication.route("/user_update", methods=["PUT"])
+#@authentication.arguments(UserUpdateSchema)
+#@authentication.response(200, RegisterUserSchema)
+#@authentication.doc(description="Updates user based on ID", summary="Updates user by ID")
+#def put(self, item_data, brewery_id):
+    #"""update user"""
+    #item = User.query.get_or_404(user_id)
+
+    #if item:
+        #item.id = item_data["id"]
+        #item.name = item_data["username"]
+    #else:
+        #item = User(**item_data)
+
+    #db.session.add(item)
+    #db.session.commit()
+
+    #return item, {"message": "User updated"}, 200
+
+
+@authentication.route("/logout")
+class UserLogout(MethodView):
+    @jwt_required()
     def post(self):
-        current_user = get_jwt_identity()
-        new_token = create_access_token(identity=current_user, fresh=False)
-        refresh_token = create_refresh_token(user.id)
-        return jsonify(new_token=new_token,
-                       refresh_token=refresh_token,
-                       token_type='Bearer'), 200
+        jti = get_jwt()["jti"]
+        return {"message": "Successfully logged out"}, 200
+
+
+@authentication.route("/delete_user", methods=["DELETE"])
+@authentication.doc(description="Delete User", summary="Delete User")
+@authentication.response(200, RegisterUserSchema)
+def delete(self, user_id):
+    """Delete user"""
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return {"message": "User deleted"}, 200
