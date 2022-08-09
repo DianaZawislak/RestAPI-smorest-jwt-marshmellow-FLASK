@@ -51,6 +51,15 @@ def created_beer_id(client):
 
     return response.json["id"]
 
+@pytest.fixture()
+def created_user_jwts(client, create_user):
+    username, password = create_user
+    response = client.post(
+        "/auth",
+        json={"username": username, "password": password},
+    )
+
+    return response.json["access_token"], response.json["refresh_token"]
 
 @pytest.fixture()
 def created_country_id(client):
@@ -66,6 +75,16 @@ def created_country_id(client):
 def created_brewery_id(client):
     response = client.post(
         "/brewery",
+        json={"name": "Test brewery"},
+    )
+
+    return response.json["id"]
+
+
+@pytest.fixture()
+def created_city_id(client):
+    response = client.post(
+        "/cities",
         json={"name": "Test brewery"},
     )
 

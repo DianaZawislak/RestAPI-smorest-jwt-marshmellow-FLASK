@@ -3,7 +3,7 @@ Override base classes here to allow painless customization in the future.
 """
 import marshmallow as ma
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-
+from flask_jwt_extended import JWTManager
 from flask_smorest import Api as ApiOrig, Blueprint as BlueprintOrig, Page
 
 
@@ -14,7 +14,7 @@ class Blueprint(BlueprintOrig):
 # Define custom converter to schema function
 # def customconverter2paramschema(converter):
 #     return {'type': 'custom_type', 'format': 'custom_format'}
-
+jwt = JWTManager()
 
 class Api(ApiOrig):
     """Api override"""

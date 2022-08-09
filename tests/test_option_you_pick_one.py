@@ -16,41 +16,78 @@ AUTH_URL = '/auth/'
 # pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
 from tests.test_geography_examples import create_token
 
-class TestApi:
-    """TEST API"""
-    jwt_token = None
-    brewery_1_id = brewery_1_etag = brewery_1 = None
-    beer_1_id = beer_1_etag = beer_1 = None
-    beer_2_id = beer_2_etag = beer_2 = None
 
 
-    def test_create_brewery(application):
-        """this tests create the brewery method"""
-        with application.app_context():
-            brewery = Brewery(name="18th Street Brewery")
-            db.session.add(brewery)
-            db.session.commit()
+def test_create_beer_brewery(application):
+    """test create city-country"""
+    with application.app_context():
+        brewery = Brewery(name="18th Street Brewery")
+        db.session.add(brewery)
+        db.session.commit()
+        beer = Beer(name="Devil's Cup", brewery_id=brewery.id)
+        db.session.add(beer)
+        db.session.commit()
 
-            assert brewery.name == "18th Street Brewery"
+        assert beer.brewery.name == "18th Street Brewery"
+
+def test_brewery_post(client, create_user):
+    """test post country"""
+    with client.application.app_context():
+        access_token = create_token()
+
+    data = {"name": "18th Street Brewery"}
+
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token)
+    }
+    response = client.post('/brewery', json=data, headers=headers)
+    response_data = response.get_json()
+    assert response.status_code == 201
+    assert response_data["name"] == "18th Street Brewery"
+
+def test_beer_post(client, create_user):
+    """test post beer"""
+    with client.application.app_context():
+        access_token = create_token()
+
+    data = {"name": "18th Street Brewery"}
+
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token)
+    }
+    response = client.post('/brewery', json=data, headers=headers)
+    response_data = response.get_json()
+    brewery_id = response_data['id']
+    pprint(brewery_id)
+
+    data = {"brewery_id": brewery_id, "name": "Devil's Cup"}
+
+    response = client.post('/beers', json=data, headers=headers)
+    assert response.status_code == 201
+    response_data = response.get_json()
+    assert response_data["id"] == 1
+    assert response_data["name"] == "Devil's Cup"
 
 
+def test_beer_delet(client, create_user):
+    """test post beer"""
+    with client.application.app_context():
+        access_token = create_token()
 
-    def test_brewery_post(self, test_client):
-            """ADD BREWERY"""
-            TestApi.author_1 = {
-                "name": "18th Street Brewery",
-                "id": "1",
-            }
-            headers_jwt = {
-                'Authorization': 'Bearer {}'.format(TestApi.jwt_token)
-            }
+    data = {"name": "18th Street Brewery"}
 
-            ret = test_client.post(BREWERIES_URL, json=TestApi.brewery_1, headers=headers_jwt)
-            assert ret.status_code == 201
-            ret_val = ret.json
-            TestApi.brewery_1_id = ret_val.pop('id')
-            TestApi.brewery_1_etag = ret.headers['ETag']
-            assert ret_val == TestApi.brewery_1
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token)
+    }
+    response = client.delete('/brewery', json=data, headers=headers)
+    response_data = response.get_json()
+    brewery_id = response_data['id']
+    pprint(brewery_id)
 
+    data = {"brewery_id": brewery_id, "name": "Devil's Cup"}
 
-
+    response = client.post('/beers', json=data, headers=headers)
+    assert response.status_code == 204
+    #response_data = response.get_json()
+    #assert response_data["id"] == 1
+    #assert response_data["name"] == "Devil's Cup"

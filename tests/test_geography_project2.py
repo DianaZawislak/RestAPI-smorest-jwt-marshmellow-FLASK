@@ -33,3 +33,12 @@ def create_token():
     user = User.query.first()
     access_token = create_access_token(user.username)
     return access_token
+
+
+def test_delete_city(client, admin_jwt, created_city_id):
+    response = client.delete(
+        f"/item/{created_city_id}",
+        headers={"Authorization": f"Bearer {admin_jwt}"},
+    )
+
+    assert response.status_code == 200
