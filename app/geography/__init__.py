@@ -29,10 +29,15 @@ class CountrySchema(Schema):
         pass
 
 
+class CountryUpdateSchema(Schema):
+    name = fields.Str()
+    id = fields.Integer()
+
+
 class CitySchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.String()
-    country_id = fields.Int()
+    country_id = fields.Integer()
 
     class Meta:
         type_ = "City"
@@ -40,6 +45,11 @@ class CitySchema(Schema):
 
     def update(self, item, new_item):
         pass
+
+
+class CityUpdateSchema(Schema):
+    name = fields.Str()
+    id = fields.Integer()
 
 
 @geography.route('/countries')
@@ -68,30 +78,34 @@ class Countries(MethodView):
 
 
 @geography.route('/countries/<string:country_id>')
-class BeerById(MethodView):
+class CountryById(MethodView):
     @geography.doc(description="Return Countries based on ID", summary="Finds country by ID")
-    @jwt_required()
     @geography.response(200, CountrySchema)
     def get(self, country_id):
         """Beers by ID"""
         country = Country.query.get_or_404(country_id)
         return country
 
-    @geography.etag
-    @geography.arguments(CountrySchema, location="json")
-    @geography.response(201, CountrySchema)
-    @geography.doc(security=[{"bearerAuth": []}])
-    @jwt_required()
-    def put(self, new_item, item_id):
-        """Modify existing country by ID"""
-        item = Country.query.get_or_404(item_id)
-        geography.check_etag(item, CountrySchema)
-        CountrySchema().update(item, new_item)
+    @geography.arguments(CountryUpdateSchema)
+    @geography.response(200, CountrySchema)
+    @geography.doc(description="Updates Country based on ID", summary="Updates Country by ID")
+    def put(self, item_data, country_id):
+        item = Country.query.get_or_404(country_id)
+
+        if item:
+            item.price = item_data["id"]
+            item.name = item_data["name"]
+        else:
+            item = Country(**item_data)
+
         db.session.add(item)
         db.session.commit()
+
         return item, {"message": "Country updated"}, 200
 
+
     @geography.doc(security=[{"bearerAuth": []}])
+    @geography.doc(description="Deletes Country based on ID", summary="Deletes Country by ID")
     def delete(self, country_id):
         """Delete country"""
         country = Country.query.get_or_404(country_id)
@@ -136,18 +150,24 @@ class CityById(MethodView):
         city = City.query.get_or_404(city_id)
         return city
 
-    @geography.etag
-    @geography.arguments(CitySchema, location="json")
-    @geography.response(201, CitySchema)
-    @geography.doc(security=[{"bearerAuth": []}])
-    @jwt_required()
-    def put(self, new_item):
-        """Update a City"""
-        item = City(**new_item)
-        db.session.update(item)
-        db.session.commit()
-        return item, {"message": "City updated"}
+    @geography.arguments(CityUpdateSchema)
+    @geography.response(200, CitySchema)
+    @geography.doc(description="Updates City based on ID", summary="Updates City by ID")
+    def put(self, item_data, city_id):
+        item = City.query.get_or_404(city_id)
 
+        if item:
+            item.price = item_data["id"]
+            item.name = item_data["name"]
+        else:
+            item = City(**item_data)
+
+        db.session.add(item)
+        db.session.commit()
+
+        return item, {"message": "City updated"}, 200
+
+    @geography.doc(description="Deletes City based on ID", summary="Deletes City by ID")
     def delete(self, city_id):
         """Delete City"""
         city = City.query.get_or_404(city_id)
