@@ -79,6 +79,8 @@ class Countries(MethodView):
 
 @geography.route('/countries/<string:country_id>')
 class CountryById(MethodView):
+
+    @geography.etag
     @geography.doc(description="Return Countries based on ID", summary="Finds country by ID")
     @geography.response(200, CountrySchema)
     def get(self, country_id):
@@ -93,7 +95,7 @@ class CountryById(MethodView):
         item = Country.query.get_or_404(country_id)
 
         if item:
-            item.price = item_data["id"]
+            item.id = item_data["id"]
             item.name = item_data["name"]
         else:
             item = Country(**item_data)
@@ -104,6 +106,7 @@ class CountryById(MethodView):
         return item, {"message": "Country updated"}, 200
 
 
+    @geography.response(204)
     @geography.doc(security=[{"bearerAuth": []}])
     @geography.doc(description="Deletes Country based on ID", summary="Deletes Country by ID")
     def delete(self, country_id):
@@ -111,7 +114,7 @@ class CountryById(MethodView):
         country = Country.query.get_or_404(country_id)
         db.session.delete(country)
         db.session.commit()
-        return {"message": "Country deleted"}, 200
+        return {"message": "Country deleted"}, 204
 
 
 @geography.route('/cities')
@@ -157,7 +160,7 @@ class CityById(MethodView):
         item = City.query.get_or_404(city_id)
 
         if item:
-            item.price = item_data["id"]
+            item.id = item_data["id"]
             item.name = item_data["name"]
         else:
             item = City(**item_data)
@@ -167,10 +170,14 @@ class CityById(MethodView):
 
         return item, {"message": "City updated"}, 200
 
+
+    @geography.response(204)
+    @geography.doc(security=[{"bearerAuth": []}])
+    @jwt_required
     @geography.doc(description="Deletes City based on ID", summary="Deletes City by ID")
     def delete(self, city_id):
         """Delete City"""
         city = City.query.get_or_404(city_id)
         db.session.delete(city)
         db.session.commit()
-        return {"message": "City deleted"}, 200
+        return {"message": "City deleted"}, 204

@@ -34,7 +34,6 @@ def create_app():
 
     with app.app_context():
         jwt = JWTManager(app)
-
         api = Api(app)
         api.spec.components.security_scheme("bearerAuth", {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"})
         api.register_blueprint(authentication)
