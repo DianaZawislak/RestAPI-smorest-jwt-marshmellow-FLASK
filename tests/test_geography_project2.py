@@ -37,16 +37,6 @@ def create_token():
     return access_token
 
 
-def test_delete_city(client, admin_jwt, created_city_id):
-    """test delete city"""
-    response = client.delete(
-        f"/item/{created_city_id}",
-        headers={"Authorization": f"Bearer {admin_jwt}"},
-    )
-
-    assert response.status_code == 200
-
-
 def test_get_country_not_found(client):
     """test country not found"""
     response = client.get(

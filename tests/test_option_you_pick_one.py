@@ -1,8 +1,7 @@
 """Tests for new blueprint (beer)"""
-
-from tests.test_geography_examples import create_token
 import uuid
 from pprint import pprint
+from tests.test_geography_examples import create_token
 
 
 # pylint: disable=unused-import

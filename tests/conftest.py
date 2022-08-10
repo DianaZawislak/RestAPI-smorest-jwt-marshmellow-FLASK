@@ -4,7 +4,7 @@
 import pytest
 from flask_jwt_extended import create_access_token
 
-from app import create_app, db, app
+from app import create_app, db
 from app.db.models import User
 
 
