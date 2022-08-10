@@ -48,6 +48,7 @@ def test_delete_city(client, admin_jwt, created_city_id):
 
 
 def test_get_country_not_found(client):
+    """test country not found"""
     response = client.get(
         "/country/1",
     )

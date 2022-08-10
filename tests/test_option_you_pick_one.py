@@ -1,24 +1,18 @@
 """Tests for new blueprint (beer)"""
-# pylint: disable=unused-import
-from http import client
 
-from flask_jwt_extended import create_access_token, decode_token
+from tests.test_geography_examples import create_token
 import uuid
 from pprint import pprint
 
-from app import db, app, config
-from app.db.models import  User, Beer, Brewery
 
+# pylint: disable=unused-import
+# pylint: disable=consider-using-f-string, no-member, undefined-variable
+# pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
 
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
 BREWERIES_URL = '/brewery/'
 BEERS_URL = '/beers/'
 AUTH_URL = '/auth/'
-
-# pylint: disable=consider-using-f-string, no-member, undefined-variable
-# pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
-
-from tests.test_geography_examples import create_token
 
 
 def test_beer_post(client, create_user):

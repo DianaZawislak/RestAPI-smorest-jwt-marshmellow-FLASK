@@ -96,12 +96,3 @@ def fresh_jwt(app):
     with app.app_context():
         access_token = create_access_token(identity=1, fresh=True)
         return access_token
-
-
-@pytest.fixture()
-def admin_jwt(application):
-    with app.app_context():
-        access_token = create_access_token(
-            identity=1, additional_claims={"is_admin": True}
-        )
-        return access_token

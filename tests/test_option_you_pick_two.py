@@ -82,10 +82,10 @@ def test_get_user_details(client, create_user):
         "/user_info",
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 401
 
 
-def test_refresh_token(client, created_user_jwts):
+def test_refresh_token(client, create_user):
     """Test refresh token"""
     response = client.post(
         "/auth",
