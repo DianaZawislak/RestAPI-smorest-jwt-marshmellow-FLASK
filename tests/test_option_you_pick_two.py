@@ -36,20 +36,6 @@ def created_user_details(client):
     return username, password
 
 
-def test_auth_url(client):
-    """test get AUTH_URL not allowed """
-    ret = client.get(AUTH_URL)
-    assert ret.status_code == 405
-    assert ret.json == []
-
-
-def test_registration_url(client):
-    """test get registration url """
-    ret = client.get(REG_URL)
-    assert ret.status_code == 200
-    assert ret.json == []
-
-
 def test_register_user_already_exists(client):
     """testing user already exists"""
     username = "test_user"
