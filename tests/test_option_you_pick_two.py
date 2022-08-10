@@ -84,13 +84,3 @@ def test_get_user_details(client, create_user):
 
     assert response.status_code == 401
 
-
-def test_refresh_token(client, create_user):
-    """Test refresh token"""
-    response = client.post(
-        "/auth",
-        headers={"Authorization": f"Bearer {created_user_jwts[1]}"},
-    )
-
-    assert response.status_code == 200
-    assert response.json["access_token"]
