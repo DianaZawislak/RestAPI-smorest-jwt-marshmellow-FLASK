@@ -65,6 +65,7 @@ class UserUpdateSchema(Schema):
     name = fields.Str()
     id = fields.Integer()
 
+
 @authentication.route('/register', methods=['POST'])
 @authentication.arguments(RegisterUserSchema, location="json")
 @authentication.response(201, RegisterUserResponseSchema)
@@ -129,24 +130,24 @@ def protected():
     )
 
 
-#@authentication.route("/user_update", methods=["PUT"])
-#@authentication.arguments(UserUpdateSchema)
-#@authentication.response(200, RegisterUserSchema)
-#@authentication.doc(description="Updates user based on ID", summary="Updates user by ID")
-#def put(self, item_data, brewery_id):
-    #"""update user"""
-    #item = User.query.get_or_404(user_id)
+# @authentication.route("/user_update", methods=["PUT"])
+# @authentication.arguments(UserUpdateSchema)
+# @authentication.response(200, RegisterUserSchema)
+# @authentication.doc(description="Updates user based on ID", summary="Updates user by ID")
+# def put(self, item_data, brewery_id):
+# """update user"""
+# item = User.query.get_or_404(user_id)
 
-    #if item:
-        #item.id = item_data["id"]
-        #item.name = item_data["username"]
-    #else:
-        #item = User(**item_data)
+# if item:
+# item.id = item_data["id"]
+# item.name = item_data["username"]
+# else:
+# item = User(**item_data)
 
-    #db.session.add(item)
-    #db.session.commit()
+# db.session.add(item)
+# db.session.commit()
 
-    #return item, {"message": "User updated"}, 200
+# return item, {"message": "User updated"}, 200
 
 
 @authentication.route("/logout")
@@ -166,10 +167,10 @@ def delete(self, user_id):
     db.session.commit()
     return {"message": "User deleted"}, 200
 
-@authentication.route("/refresh")
-class TokenRefresh(MethodView):
-    @jwt_required(refresh=True)
-    def post(self):
-        current_user = get_jwt_identity()
-        new_token = create_access_token(identity=current_user, fresh=False)
-        return {"access_token": new_token}, 200
+
+@authentication.get("/refresh")
+@jwt_required(refresh=True)
+def refresh_user_token(self):
+    identity = get_jwt_identity()
+    access = create_access_token(identity=identity)
+    return {"access_token": access}, 200

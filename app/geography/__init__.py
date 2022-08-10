@@ -77,7 +77,7 @@ class Countries(MethodView):
         return item
 
 
-@geography.route('/countries/<string:country_id>')
+@geography.route('/countries/<int:country_id>')
 class CountryById(MethodView):
 
     @geography.etag
@@ -88,23 +88,24 @@ class CountryById(MethodView):
         country = Country.query.get_or_404(country_id)
         return country
 
+
+@geography.route("/countries/<int:country_id>")
+class CountriesByID(MethodView):
+    """Update a Country"""
+
     @geography.arguments(CountryUpdateSchema)
     @geography.response(200, CountrySchema)
-    @geography.doc(description="Updates Country based on ID", summary="Updates Country by ID")
     def put(self, item_data, country_id):
+        """Update a Country"""
         item = Country.query.get_or_404(country_id)
-
         if item:
             item.id = item_data["id"]
             item.name = item_data["name"]
         else:
             item = Country(**item_data)
-
         db.session.add(item)
         db.session.commit()
-
-        return item, {"message": "Country updated"}, 200
-
+        return item
 
     @geography.response(204)
     @geography.doc(security=[{"bearerAuth": []}])
@@ -153,23 +154,24 @@ class CityById(MethodView):
         city = City.query.get_or_404(city_id)
         return city
 
+
+@geography.route("/cities/<int:city_id>")
+class CitiesByID(MethodView):
+    """Update a City by id"""
+
     @geography.arguments(CityUpdateSchema)
     @geography.response(200, CitySchema)
-    @geography.doc(description="Updates City based on ID", summary="Updates City by ID")
     def put(self, item_data, city_id):
+        """Update City"""
         item = City.query.get_or_404(city_id)
-
         if item:
             item.id = item_data["id"]
             item.name = item_data["name"]
         else:
             item = City(**item_data)
-
         db.session.add(item)
         db.session.commit()
-
-        return item, {"message": "City updated"}, 200
-
+        return item
 
     @geography.response(204)
     @geography.doc(security=[{"bearerAuth": []}])

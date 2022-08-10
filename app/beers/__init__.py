@@ -79,7 +79,7 @@ class Breweries(MethodView):
         return item
 
 
-@beers.route("/brewery/<string:brewery_id>")
+@beers.route("/brewery/<int:brewery_id>")
 class BreweriesById(MethodView):
     @beers.doc(description="Return Breweries based on ID", summary="Finds breweries by ID")
     @beers.response(200, BrewerySchema)
@@ -87,6 +87,12 @@ class BreweriesById(MethodView):
         """Breweries by ID"""
         brewery = Brewery.query.get_or_404(brewery_id)
         return brewery
+
+
+@beers.route("/beers/<int:brewery_id>")
+class BeersByID(MethodView):
+    """Update a Brewery"""
+
 
     @beers.arguments(BreweryUpdateSchema)
     @beers.response(200, BrewerySchema)
@@ -101,10 +107,10 @@ class BreweriesById(MethodView):
         else:
             item = Brewery(**item_data)
 
-        db.session.add(item)
-        db.session.commit()
+            db.session.add(item)
+            db.session.commit()
 
-        return item, {"message": "Brewery updated"}, 200
+            return item, {"message": "Brewery updated"}, 200
 
     @beers.doc(security=[{"bearerAuth": []}])
     @beers.doc(description="Deletes Brewery based on ID", summary="Deletes brewery by ID")
@@ -141,7 +147,7 @@ class Beers(MethodView):
         return item
 
 
-@beers.route("/beers/<string:beer_id>")
+@beers.route("/beers/<int:beer_id>")
 class BeersById(MethodView):
     @beers.etag
     @beers.doc(description="Returns Beers based on ID", summary="Finds beers by ID")
@@ -150,6 +156,10 @@ class BeersById(MethodView):
         """Breweries by ID"""
         beer = Beer.query.get_or_404(beer_id)
         return beer
+
+@beers.route("/beers/<int:beer_id>")
+class BeersByID(MethodView):
+    """Update a Beer"""
 
     @beers.doc(description="Updates Beers based on ID", summary="Updates beers by ID")
     @beers.arguments(BeerUpdateSchema)
