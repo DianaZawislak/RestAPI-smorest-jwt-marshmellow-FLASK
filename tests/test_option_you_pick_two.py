@@ -1,14 +1,11 @@
-"""user tests with token refresh"""
+"""user and jwt tests"""
+
 import uuid
-
-import pytest
 from datetime import timedelta
-
 import pytest
 from dateutil.relativedelta import relativedelta
 from flask import Flask
 from flask import jsonify
-
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import create_refresh_token
 from flask_jwt_extended import decode_token
@@ -19,8 +16,8 @@ from tests.utils import encode_token
 from tests.utils import get_jwt_manager
 from tests.utils import make_headers
 
-# pylint: disable=redefined-outer-name, unused-argument
-
+# pylint: disable=redefined-outer-name, unused-argument, invalid-name
+# pylint: missing-function-docstring
 
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
 AUTH_URL = '/auth'
@@ -100,6 +97,7 @@ def test_get_user_details(client, create_user):
 
 @pytest.fixture(scope="function")
 def app():
+    """fixture"""
     app = Flask(__name__)
     app.config["JWT_SECRET_KEY"] = "foobarbaz"
     JWTManager(app)
@@ -136,6 +134,7 @@ def app():
 
 
 def test_jwt_required(app):
+    """test jwt required"""
     url = "/protected"
 
     test_client = app.test_client()
@@ -162,6 +161,7 @@ def test_jwt_required(app):
 
 
 def test_fresh_jwt_required(app):
+    """test fresh jwt required"""
     jwtM = get_jwt_manager(app)
     url = "/fresh_protected"
 
@@ -204,6 +204,7 @@ def test_fresh_jwt_required(app):
     # Test with custom response
     @jwtM.needs_fresh_token_loader
     def custom_response(jwt_header, jwt_data):
+        """test custom response"""
         assert jwt_header["alg"] == "HS256"
         assert jwt_data["sub"] == "username"
         return jsonify(msg="foobar"), 201
@@ -214,6 +215,7 @@ def test_fresh_jwt_required(app):
 
 
 def test_refresh_jwt_required(app):
+    """test refresh jwt required"""
     url = "/refresh_protected"
 
     test_client = app.test_client()
@@ -261,6 +263,7 @@ def test_jwt_required_no_typecheck(app):
 
 @pytest.mark.parametrize("delta_func", [timedelta, relativedelta])
 def test_jwt_optional(app, delta_func):
+    """parametize"""
     url = "/optional_protected"
 
     test_client = app.test_client()
@@ -290,6 +293,7 @@ def test_jwt_optional(app, delta_func):
 
 
 def test_jwt_optional_with_no_valid_jwt(app):
+    """test jwt optional with no valid jwt"""
     url = "/optional_protected"
     test_client = app.test_client()
 
@@ -336,6 +340,7 @@ def test_jwt_optional_with_no_valid_jwt(app):
 
 
 def test_override_jwt_location(app):
+    """test override jwt location"""
     app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
 
     @app.route("/protected_other")
@@ -368,6 +373,7 @@ def test_override_jwt_location(app):
 
 
 def test_invalid_jwt(app):
+    """tests invalid jwt"""
     url = "/protected"
     jwtM = get_jwt_manager(app)
     test_client = app.test_client()
@@ -389,6 +395,7 @@ def test_invalid_jwt(app):
 
 
 def test_jwt_missing_claims(app):
+    """test jwt missing claims"""
     url = "/protected"
     test_client = app.test_client()
     token = encode_token(app, {"foo": "bar"})
@@ -399,6 +406,7 @@ def test_jwt_missing_claims(app):
 
 
 def test_jwt_invalid_audience(app):
+    """test jwt invalid audience"""
     url = "/protected"
     test_client = app.test_client()
 
@@ -422,6 +430,7 @@ def test_jwt_invalid_audience(app):
 
 
 def test_jwt_invalid_issuer(app):
+    """tets invalid issuer"""
     url = "/protected"
     test_client = app.test_client()
 
@@ -445,6 +454,7 @@ def test_jwt_invalid_issuer(app):
 
 
 def test_malformed_token(app):
+    """tes malformed jwt"""
     url = "/protected"
     test_client = app.test_client()
 
@@ -455,7 +465,9 @@ def test_malformed_token(app):
 
 
 @pytest.mark.parametrize("delta_func", [timedelta, relativedelta])
+
 def test_expired_token(app, delta_func):
+    """test expired token"""
     url = "/protected"
     jwtM = get_jwt_manager(app)
     test_client = app.test_client()
@@ -470,6 +482,7 @@ def test_expired_token(app, delta_func):
     # Test new custom response
     @jwtM.expired_token_loader
     def custom_response(expired_jwt_header, expired_jwt_data):
+        """custom response"""
         assert expired_jwt_header["alg"] == "HS256"
         assert expired_jwt_data["sub"] == "username"
         assert expired_jwt_data["type"] == "access"
@@ -481,6 +494,7 @@ def test_expired_token(app, delta_func):
 
 
 def test_expired_token_via_decode_token(app):
+    """test exp token via decode"""
     jwtM = get_jwt_manager(app)
 
     @jwtM.expired_token_loader
@@ -502,6 +516,7 @@ def test_expired_token_via_decode_token(app):
 
 
 def test_no_token(app):
+    """test no token"""
     url = "/protected"
     jwtM = get_jwt_manager(app)
     test_client = app.test_client()
@@ -522,6 +537,7 @@ def test_no_token(app):
 
 
 def test_different_token_algorightm(app):
+    """test diff token algorithm"""
     url = "/protected"
     test_client = app.test_client()
     with app.test_request_context():
