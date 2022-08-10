@@ -21,6 +21,12 @@ AUTH_URL = '/auth/'
 # pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
 
 
+def test_countries_url(client):
+    """test get COUNTRIES_URL """
+    ret = client.get(COUNTRIES_URL)
+    assert ret.status_code == 200
+    assert ret.json == []
+
 def test_get_city_not_found(client):
     """this tests city not found"""
     response = client.get(
