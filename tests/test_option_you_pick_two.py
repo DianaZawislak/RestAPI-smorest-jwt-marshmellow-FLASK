@@ -4,7 +4,7 @@ import uuid
 import pytest
 
 
-# pylint: disable=redefined-outer-name
+# pylint: disable=redefined-outer-name, unused-argument
 
 
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
@@ -76,7 +76,7 @@ def test_login_user_bad_username(client, created_user_details):
     assert response.status_code == 401
 
 
-def test_get_user_details(client, created_user_details):
+def test_get_user_details(client, create_user):
     """testing get user details"""
     response = client.get(
         "/user_info",
@@ -86,6 +86,7 @@ def test_get_user_details(client, created_user_details):
 
 
 def test_refresh_token(client, created_user_jwts):
+    """Test refresh token"""
     response = client.post(
         "/auth",
         headers={"Authorization": f"Bearer {created_user_jwts[1]}"},
