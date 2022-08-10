@@ -1,9 +1,13 @@
+"""utilities"""
 import jwt
 
 from flask_jwt_extended.config import config
 
+#pylint: disable=consider-using-f-string
+
 
 def encode_token(app, token_data, headers=None):
+    """encode token"""
     with app.test_request_context():
         return jwt.encode(
             token_data,
@@ -15,8 +19,10 @@ def encode_token(app, token_data, headers=None):
 
 
 def get_jwt_manager(app):
+    """get jwt manager"""
     return app.extensions["flask-jwt-extended"]
 
 
 def make_headers(jwt):
+    """make headers"""
     return {"Authorization": "Bearer {}".format(jwt)}

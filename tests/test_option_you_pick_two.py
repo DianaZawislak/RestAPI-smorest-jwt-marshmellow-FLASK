@@ -16,8 +16,8 @@ from tests.utils import encode_token
 from tests.utils import get_jwt_manager
 from tests.utils import make_headers
 
-# pylint: disable=redefined-outer-name, unused-argument, invalid-name
-# pylint: missing-function-docstring
+# pylint: disable=redefined-outer-name, unused-argument, invalid-name, no-else-return
+# pylint: disable=missing-function-docstring
 
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
 AUTH_URL = '/auth'
