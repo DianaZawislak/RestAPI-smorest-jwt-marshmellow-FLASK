@@ -56,7 +56,7 @@ def test_get_country_not_found(client):
 def test_delete_city(client, created_city_id):
     access_token = create_token()
     response = client.delete(
-        f"/cities/{created_city_id}",
+        f"/cities{created_city_id}",
         headers={'Authorization': 'Bearer {}'.format(access_token)},
     )
 
