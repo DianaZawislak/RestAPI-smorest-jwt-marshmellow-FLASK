@@ -48,13 +48,3 @@ def test_beer_post(client, create_user):
     response_data = response.get_json()
     assert response_data["id"] == 1
     assert response_data["name"] == "Devil's Cup"
-
-
-def test_create_brewery(client):
-    response = client.post(
-        "/breweries",
-        json={"name": "Test brewery"},
-    )
-
-    assert response.status_code == 201
-    assert response.json["name"] == "Test brewery"
