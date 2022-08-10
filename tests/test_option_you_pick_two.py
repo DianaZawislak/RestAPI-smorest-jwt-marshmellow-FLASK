@@ -83,4 +83,3 @@ def test_get_user_details(client, create_user):
     )
 
     assert response.status_code == 401
-
