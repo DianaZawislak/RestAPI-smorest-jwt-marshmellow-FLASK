@@ -51,3 +51,14 @@ def test_get_country_not_found(client):
 
     assert response.status_code == 404
     assert response.json == {"code": 404, "status": "Not Found"}
+
+
+def test_delete_city(client, created_city_id):
+    access_token = create_token()
+    response = client.delete(
+        f"/cities/{created_city_id}",
+        headers={'Authorization': 'Bearer {}'.format(access_token)},
+    )
+
+    assert response.status_code == 200
+    assert response.json["message"] == "Item deleted."

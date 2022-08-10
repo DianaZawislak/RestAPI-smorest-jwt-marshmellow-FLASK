@@ -85,10 +85,10 @@ def created_brewery_id(client):
 def created_city_id(client):
     response = client.post(
         "/cities",
-        json={"name": "Test brewery"},
+        json={"name": "Test city"},
     )
 
-    return response.json["id"]
+    return response.get_json()["id"]
 
 
 @pytest.fixture()
