@@ -75,7 +75,7 @@ def created_country_id(client):
 def created_brewery_id(client):
     response = client.post(
         "/brewery",
-        json={"name": "Test brewery"},
+        json={"id": "Test brewery"},
     )
 
     return response.json["id"]
