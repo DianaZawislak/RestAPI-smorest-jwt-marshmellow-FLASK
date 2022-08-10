@@ -9,7 +9,7 @@ UCID:DZ29
 #### Screenshot of my API running on local host 
 ###* [Swagger UI Link On Heroku](https://api-project-is960.herokuapp.com/swagger-ui)    <=== click to see swagger UI on heroku
 
-![alt text](app/static/images/API.JPG)
+![alt text](app/static/images/img.png)
 
 ## Introduction
 
