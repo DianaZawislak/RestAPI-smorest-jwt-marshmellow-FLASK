@@ -51,12 +51,3 @@ def test_get_country_not_found(client):
 
     assert response.status_code == 404
     assert response.json == {"code": 404, "status": "Not Found"}
-
-
-def test_delete_country(client, created_country_id):
-    response = client.delete(
-        f"/countries/{created_country_id}",
-    )
-
-    assert response.status_code == 200
-    assert response.json == {"message": "Country deleted"}
