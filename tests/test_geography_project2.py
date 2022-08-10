@@ -15,7 +15,7 @@ from app.db.models import City, Country, User, Beer, Brewery
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
 COUNTRIES_URL = '/countries'
 CITIES_URL = '/cities/'
-AUTH_URL = '/auth/'
+
 
 # pylint: disable=consider-using-f-string, no-member, undefined-variable
 # pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument

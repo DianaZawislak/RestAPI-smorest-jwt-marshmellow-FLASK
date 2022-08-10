@@ -9,9 +9,21 @@ from tests.test_geography_examples import create_token
 # pylint: disable=wrong-import-order, no-value-for-parameter, unused-argument
 
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
-BREWERIES_URL = '/brewery/'
-BEERS_URL = '/beers/'
-AUTH_URL = '/auth/'
+BREWERIES_URL = '/brewery'
+BEERS_URL = '/beers'
+
+def test_beers_url(client):
+    """test get BEERS_URL """
+    ret = client.get(BEERS_URL)
+    assert ret.status_code == 200
+    assert ret.json == []
+
+
+def test_breweries_url(client):
+    """test get Breweries_URL """
+    ret = client.get(BREWERIES_URL)
+    assert ret.status_code == 200
+    assert ret.json == []
 
 
 def test_beer_post(client, create_user):

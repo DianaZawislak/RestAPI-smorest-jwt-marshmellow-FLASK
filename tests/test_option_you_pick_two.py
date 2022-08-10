@@ -8,9 +8,7 @@ import pytest
 
 
 DUMMY_ID = str(uuid.UUID('00000000-0000-0000-0000-000000000000'))
-COUNTRIES_URL = '/countries/'
-CITIES_URL = '/cities/'
-AUTH_URL = '/auth/'
+AUTH_URL = '/auth'
 
 
 @pytest.fixture()
@@ -36,6 +34,13 @@ def created_user_details(client):
     )
 
     return username, password
+
+
+def test_authorization_url(client):
+    """test get AUTH_URL """
+    ret = client.get(AUTH_URL)
+    assert ret.status_code == 200
+    assert ret.json == []
 
 
 def test_register_user_already_exists(client):
