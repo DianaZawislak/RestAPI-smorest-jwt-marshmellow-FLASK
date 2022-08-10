@@ -3,7 +3,7 @@ import jwt
 
 from flask_jwt_extended.config import config
 
-#pylint: disable=consider-using-f-string
+#pylint: disable=consider-using-f-string, redefined-outer-name
 
 
 def encode_token(app, token_data, headers=None):
